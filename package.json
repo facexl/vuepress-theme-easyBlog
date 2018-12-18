@@ -1,0 +1,22 @@
+{
+  "name": "vuepress-theme-easyblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx anywhere -d .vuepress/dist -p 8080",
+    "start": "vuepress dev .",
+    "build": "vuepress build ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facexl/vuepress-theme-easyBlog.git"
+  },
+  "author": "438944342@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/facexl/vuepress-theme-easyBlog/issues"
+  },
+  "homepage": "https://github.com/facexl/vuepress-theme-easyBlog#readme",
+  "dependencies": {}
+}

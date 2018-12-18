@@ -1,0 +1,55 @@
+{
+  "_from": "@vuepress/plugin-search@^1.0.0-alpha.29",
+  "_id": "@vuepress/plugin-search@1.0.0-alpha.29",
+  "_inBundle": false,
+  "_integrity": "sha1-hpzxli6dY3YQqUG8XKR87fOxsy0=",
+  "_location": "/vuepress/@vuepress/plugin-search",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@vuepress/plugin-search@^1.0.0-alpha.29",
+    "name": "@vuepress/plugin-search",
+    "escapedName": "@vuepress%2fplugin-search",
+    "scope": "@vuepress",
+    "rawSpec": "^1.0.0-alpha.29",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0-alpha.29"
+  },
+  "_requiredBy": [
+    "/vuepress/@vuepress/theme-default"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/@vuepress/plugin-search/download/@vuepress/plugin-search-1.0.0-alpha.29.tgz",
+  "_shasum": "869cf1962e9d637610a941bc5ca47cedf3b1b32d",
+  "_spec": "@vuepress/plugin-search@^1.0.0-alpha.29",
+  "_where": "/Users/xiaolang/.nvm/versions/node/v10.0.0/lib/node_modules/vuepress/node_modules/@vuepress/theme-default",
+  "author": {
+    "name": "ULIVZ",
+    "email": "chl814@foxmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/vuejs/vuepress/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "search plugin for vuepress",
+  "gitHead": "b3aba2d43003f0cfd65c4b1d4a1615bd58bb20b7",
+  "homepage": "https://github.com/vuejs/vuepress/packages/@vuepress/plugin-search#readme",
+  "keywords": [
+    "documentation",
+    "vue",
+    "vuepress",
+    "generator"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "@vuepress/plugin-search",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/vuepress.git"
+  },
+  "version": "1.0.0-alpha.29"
+}
