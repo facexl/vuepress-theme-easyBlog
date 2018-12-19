@@ -230,3 +230,37 @@ function resolveItem (item, pages, base, isNested) {
     }
   }
 }
+
+//______________________easy blog fn
+
+/**
+ * easyBlog new fn
+ * @param {array} pages
+ * @param {string} route
+ */
+export const resolveEasyBlogPage = (pages, route)=>{
+    if(route.indexOf('/category/')!==-1){
+        return false
+    }
+    const res = pages.filter(it=>it.frontmatter.date)    
+    res.sort((a,b)=>Number(new Date(b.frontmatter.date))-Number(new Date(a.frontmatter.date)))
+    const result = {
+        prev:false,
+        next:false
+    }
+    res.forEach((it,i,arr)=>{
+        if(it.path===route){
+            if(i>0){
+                result.prevTitle = arr[i-1].title
+                result.prevPath = arr[i-1].path
+                result.prev = true
+            }
+            if(i<arr.length-1){
+                result.nextTitle = arr[i+1].title
+                result.nextPath = arr[i+1].path
+                result.next = true
+            }
+        }
+    })
+    return result
+}

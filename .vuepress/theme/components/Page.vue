@@ -26,47 +26,50 @@
       </div>
     </div> -->
 
-    <div class="page-nav" v-if="prev || next">
+    <div class="page-nav" v-if="footer.prev || footer.next">
       <p class="inner">
         <span
-          v-if="prev"
+          v-if="footer.prev"
           class="prev"
         >
           ←
           <router-link
-            v-if="prev"
+            v-if="footer.prev"
             class="prev"
-            :to="prev.path"
+            :to="footer.prevPath"
           >
-            {{ prev.title || prev.path }}
+            {{ footer.prevTitle }}
           </router-link>
         </span>
 
         <span
-          v-if="next"
+          v-if="footer.next"
           class="next"
         >
           <router-link
-            v-if="next"
-            :to="next.path"
+            v-if="footer.next"
+            :to="footer.nextPath"
           >
-            {{ next.title || next.path }}
+            {{ footer.nextTitle }}
           </router-link>
           →
         </span>
       </p>
     </div>
-
     <slot name="bottom"/>
+    <Pagination></Pagination>
   </div>
 </template>
 
 <script>
-import { resolvePage, normalize, outboundRE, endingSlashRE } from '../util'
+import { resolveEasyBlogPage, normalize, outboundRE, endingSlashRE } from '../util'
+import Pagination from './Pagination'
 
 export default {
   props: ['sidebarItems'],
-
+  components:{
+      Pagination
+  },
   computed: {
     contentMounted () {
       return this.$vuepress.$get('contentMounted')
@@ -86,26 +89,31 @@ export default {
       return 'Last Updated'
     },
 
-    prev () {
-      const prev = this.$page.frontmatter.prev
-      if (prev === false) {
-        return
-      } else if (prev) {
-        return resolvePage(this.$site.pages, prev, this.$route.path)
-      } else {
-        return resolvePrev(this.$page, this.sidebarItems)
-      }
-    },
+    // prev () {
+    //   const prev = this.$page.frontmatter.prev
+    //   if (prev === false) {
+    //     return
+    //   } else if (prev) {
+    //     return resolvePage(this.$site.pages, prev, this.$route.path)
+    //   } else {
+    //     return resolvePrev(this.$page, this.sidebarItems)
+    //   }
+    //     resolveEasyBlogPage(this.$site.pages, this.$route.path)
+    // },
 
-    next () {
-      const next = this.$page.frontmatter.next
-      if (next === false) {
-        return
-      } else if (next) {
-        return resolvePage(this.$site.pages, next, this.$route.path)
-      } else {
-        return resolveNext(this.$page, this.sidebarItems)
-      }
+    // next () {
+    //   const next = this.$page.frontmatter.next
+    //   if (next === false) {
+    //     return
+    //   } else if (next) {
+    //     return resolvePage(this.$site.pages, next, this.$route.path)
+    //   } else {
+    //     return resolveNext(this.$page, this.sidebarItems)
+    //   }
+    // },
+    footer(){
+        window.x = this
+        return resolveEasyBlogPage(this.$site.pages, this.$route.path)
     },
 
     editLink () {
@@ -170,30 +178,30 @@ export default {
   }
 }
 
-function resolvePrev (page, items) {
-  return find(page, items, -1)
-}
+// function resolvePrev (page, items) {
+//   return find(page, items, -1)
+// }
 
-function resolveNext (page, items) {
-  return find(page, items, 1)
-}
+// function resolveNext (page, items) {
+//   return find(page, items, 1)
+// }
 
-function find (page, items, offset) {
-  const res = []
-  items.forEach(item => {
-    if (item.type === 'group') {
-      res.push(...item.children || [])
-    } else {
-      res.push(item)
-    }
-  })
-  for (let i = 0; i < res.length; i++) {
-    const cur = res[i]
-    if (cur.type === 'page' && cur.path === decodeURIComponent(page.path)) {
-      return res[i + offset]
-    }
-  }
-}
+// function find (page, items, offset) {
+//   const res = []
+//   items.forEach(item => {
+//     if (item.type === 'group') {
+//       res.push(...item.children || [])
+//     } else {
+//       res.push(item)
+//     }
+//   })
+//   for (let i = 0; i < res.length; i++) {
+//     const cur = res[i]
+//     if (cur.type === 'page' && cur.path === decodeURIComponent(page.path)) {
+//       return res[i + offset]
+//     }
+//   }
+// }
 </script>
 
 <style lang="stylus">

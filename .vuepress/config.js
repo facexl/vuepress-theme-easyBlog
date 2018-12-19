@@ -5,10 +5,10 @@ module.exports = {
         githubLink:'https://github.com/facexl/blog',
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'All', link: '/category/all' },
-          { text: 'Study', link: '/category/study' },
-          { text: 'Practice', link: '/category/practice' },
-          { text: 'Talk', link: '/category/talk' },
+          { text: 'All', link: '/category/all/1' },
+          { text: 'Study', link: '/category/study/1' },
+          { text: 'Practice', link: '/category/practice/1' },
+          { text: 'Chat', link: '/category/chat/1' },
         ],
         // sidebar: [
         //   ['/','666'],

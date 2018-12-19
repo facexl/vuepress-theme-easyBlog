@@ -1,7 +1,7 @@
 ---
 title: 基于docsify搭建博客
 date: 2018/07/25
-category: talk
+category: chat
 ---
 
 ### canvas实现双重广告效果    //标题

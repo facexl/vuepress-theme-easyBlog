@@ -18,5 +18,7 @@
     "url": "https://github.com/facexl/vuepress-theme-easyBlog/issues"
   },
   "homepage": "https://github.com/facexl/vuepress-theme-easyBlog#readme",
-  "dependencies": {}
+  "dependencies": {
+    "chalk": "^2.4.1"
+  }
 }

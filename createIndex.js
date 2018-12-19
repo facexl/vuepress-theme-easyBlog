@@ -1,7 +1,7 @@
 const fs = require('fs')
 const join = require('path').join
 const path = require('path')
-
+const chalk = require('chalk')
 /**
  * 读取文件路径
  * @param startPath  起始目录文件夹路径
@@ -51,7 +51,7 @@ const writeFileFn = (fileName,str)=>{
         if (err) {
           console.log(err);
         } else {
-          console.log('success');
+          console.log(chalk.blue(`create ${fileName} successs`))
         }
       });
 }
@@ -82,17 +82,18 @@ const handleYAML = (str)=>{
  *      }
  * ]
  */
+
 const handleFileContent = (fileNamesArr)=>{
     return new Promise(resolve=>{
         Promise.all(fileNamesArr.map(it=>getContent(it))).then(res=>{
-            console.log(res)
+            // console.log(res)
 
             res.sort((a,b)=>Number(new Date(b.date))-Number(new Date(a.date)))
 
             let typeArr = []
 
             typeArr.push({
-                category:"index",
+                category:"all",
                 insert:res
             })
 
@@ -125,37 +126,112 @@ const handleFileContent = (fileNamesArr)=>{
  * 
  * @param {*} tableList 目录列表
  */
-const tableTamplate = (tableList)=>{
+const tableTamplate = (tableList,category)=>{
     
     return tableList.map((it,i)=>{
-        return `#### [${it.title}](/${it.path})_\`${it.date}\`_\n*****`
+        return `${i===0?`---\ntitle: ${category}\n---\n`:''} #### [${it.title}](/${it.path})_\`${it.date}\`_\n*****`
     }).join('\n')
 }
 
+//检测文件或者文件夹存在 
+const fsExistsSync=(path)=>{
+    try{
+        fs.accessSync(path,fs.F_OK);
+    }catch(e){
+        return false;
+    }
+    return true;
+}
+
 /**
- * 生成分类
- * @param {*} tableList 
+ * 删除目录
+ * @param {*} path 
  */
-// const makeFilter = (tableList) => {
-//     let str = `* [all](/)`
-//     tableList.forEach((it,i)=>{
-//         i!==0 && (str+=`\n* [${it.category}](/type/${it.category})`)
-//     })
-//     return str
+const deleteall=(path)=>{
+	var files = [];
+	if(fs.existsSync(path)) {
+		files = fs.readdirSync(path);
+		files.forEach(function(file, index) {
+			var curPath = path + "/" + file;
+			if(fs.statSync(curPath).isDirectory()) { // recurse
+				deleteall(curPath);
+			} else { // delete file
+				fs.unlinkSync(curPath);
+			}
+		});
+		fs.rmdirSync(path);
+    }
+} 
+
+// const a = {
+//     category:'all',
+//     page:{
+//         1:[
+//             {
+//                 title:1,
+//                 date:2,
+//                 path:3,
+//             }
+//         ]
+//     }
 // }
 
 const init = ()=>{
+    if(fsExistsSync('./category')){
+        deleteall('./category')
+        fs.mkdirSync('./category')
+    }else{
+        fs.mkdirSync('./category')
+    }
     let fileNames=findSync('./blog');
     fileNames.forEach((it,i,arr)=>it.includes('DS_Store') && arr.splice(i,1))
     handleFileContent(fileNames).then(e=>{
-       e.forEach((it,i)=>{
-           i===0?writeFileFn('./category/all.md',tableTamplate(it.insert)):writeFileFn(`./category/${it.category}.md`,tableTamplate(it.insert))
+       e.forEach(it=>{
+            it.page = {}
+            const mArr = spliceArray(it.insert,20)
+            mArr.forEach((item,index)=>{
+                it.page[index+1] = item
+            })
        })
-       //writeFileFn('./_navbar.md',makeFilter(e))
+
+       e.forEach(it=>{
+
+            if(!fsExistsSync(`./category/${it.category}`)){
+                fs.mkdirSync(`./category/${it.category}`)
+            }
+
+            Object.keys(it.page).forEach(item=>{
+                writeFileFn(`./category/${it.category}/${item}.md`,tableTamplate(it.page[item],it.category))
+            })
+
+       })
     })  
 }
 
+/**
+ * 数组
+ * @param {*} arr 
+ * @param {*} len 
+ */
+const spliceArray = (arr,len)=>{
+    const result = []
+    const spliceDo = (a,l)=>{
+        if(a.length>l){
+            const b = a.splice(l)
+            result.push(a)
+            spliceDo(b,l)
+        }else{
+            result.push(a)
+        }
+    }
+    spliceDo(arr,len)
+    return result
+}
+
 init()
+
+
+
 
 
  
