@@ -57,12 +57,12 @@
       </p>
     </div>
     <slot name="bottom"/>
-    <Pagination></Pagination>
+    <Pagination v-if="isCategoryPage"></Pagination>
   </div>
 </template>
 
 <script>
-import { resolveEasyBlogPage, normalize, outboundRE, endingSlashRE } from '../util'
+import { resolveEasyBlogPage, normalize, outboundRE, endingSlashRE,isCategoryPage } from '../util'
 import Pagination from './Pagination'
 
 export default {
@@ -88,6 +88,9 @@ export default {
       }
       return 'Last Updated'
     },
+    isCategoryPage(){
+        return isCategoryPage(this.$route.path)
+    },
 
     // prev () {
     //   const prev = this.$page.frontmatter.prev
@@ -112,7 +115,6 @@ export default {
     //   }
     // },
     footer(){
-        window.x = this
         return resolveEasyBlogPage(this.$site.pages, this.$route.path)
     },
 

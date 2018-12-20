@@ -2,6 +2,12 @@ const fs = require('fs')
 const join = require('path').join
 const path = require('path')
 const chalk = require('chalk')
+const config = require('./.vuepress/config')
+console.log(123,config)
+
+const pageSize = config.themeConfig.pageSize || 20
+const categoryDirName = './category'
+
 /**
  * 读取文件路径
  * @param startPath  起始目录文件夹路径
@@ -177,18 +183,18 @@ const deleteall=(path)=>{
 // }
 
 const init = ()=>{
-    if(fsExistsSync('./category')){
-        deleteall('./category')
-        fs.mkdirSync('./category')
+    if(fsExistsSync(categoryDirName)){
+        deleteall(categoryDirName)
+        fs.mkdirSync(categoryDirName)
     }else{
-        fs.mkdirSync('./category')
+        fs.mkdirSync(categoryDirName)
     }
     let fileNames=findSync('./blog');
     fileNames.forEach((it,i,arr)=>it.includes('DS_Store') && arr.splice(i,1))
     handleFileContent(fileNames).then(e=>{
        e.forEach(it=>{
             it.page = {}
-            const mArr = spliceArray(it.insert,20)
+            const mArr = spliceArray(it.insert,pageSize)
             mArr.forEach((item,index)=>{
                 it.page[index+1] = item
             })
@@ -196,12 +202,12 @@ const init = ()=>{
 
        e.forEach(it=>{
 
-            if(!fsExistsSync(`./category/${it.category}`)){
-                fs.mkdirSync(`./category/${it.category}`)
+            if(!fsExistsSync(`${categoryDirName}/${it.category}`)){
+                fs.mkdirSync(`${categoryDirName}/${it.category}`)
             }
 
             Object.keys(it.page).forEach(item=>{
-                writeFileFn(`./category/${it.category}/${item}.md`,tableTamplate(it.page[item],it.category))
+                writeFileFn(`${categoryDirName}/${it.category}/${item}.md`,tableTamplate(it.page[item],it.category))
             })
 
        })

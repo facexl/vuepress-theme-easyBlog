@@ -15,5 +15,6 @@ module.exports = {
         //   ['/blog/x','6667']
         // ]
         // sidebar: 'auto'
+        pageSize:20
     },
 }

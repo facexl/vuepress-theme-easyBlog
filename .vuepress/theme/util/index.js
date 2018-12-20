@@ -239,7 +239,7 @@ function resolveItem (item, pages, base, isNested) {
  * @param {string} route
  */
 export const resolveEasyBlogPage = (pages, route)=>{
-    if(route.indexOf('/category/')!==-1){
+    if(isCategoryPage(route)){
         return false
     }
     const res = pages.filter(it=>it.frontmatter.date)    
@@ -263,4 +263,10 @@ export const resolveEasyBlogPage = (pages, route)=>{
         }
     })
     return result
+}
+/**
+ * 
+ */
+export const isCategoryPage = (route)=>{
+    return route.indexOf('/category/')!==-1
 }

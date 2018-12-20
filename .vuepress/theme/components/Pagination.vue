@@ -1,32 +1,85 @@
 <template>
   <nav class="pagination-nav">
-    <router-link class="pagination-action pagination-prev" 
-      to="$pagination.prevLink"
-      >← </router-link>
-    <div class="pagination-docker">
-      <!-- <router-link v-for="i in [1,2,3]"
-        :key="i" 
-        class="pagination-num"
-        to="path"
-        class="px">
-        {{ i + 1 }}
-      </router-link>   -->
-    </div>
-    <router-link class="pagination-action pagination-next" 
-      to="/category/all.html#3"
-      > →</router-link>
+      <div class="page-box">
+        <router-link class="pagination-action pagination-prev" 
+        v-if="page.prevPage"
+        :to="page.prevPage"
+        >← </router-link>
+        <div class="pagination-docker">
+        <router-link v-for="item in page.pages"
+            :key="item" 
+            :to="`${item}.html`"
+            :class="hightlightCurrentPage(item)?'pagination-current':''"
+        >
+            {{ item }}
+        </router-link>  
+        </div>
+        <router-link class="pagination-action pagination-next"
+        v-if="page.nextPage" 
+        :to="page.nextPage"
+        > →</router-link>
+      </div>
   </nav>
 </template>
 
 <script>
 export default {
-//   methods: {
-//     hightlightCurrentPage(pageNum) {
-//       return {
-//         'pagination-current': pageNum === this.$pagination.currentIndex + 1
-//       }
-//     }
-//   }
+    data(){
+        return {
+            
+        }
+    },
+    computed:{
+        page(){
+            const category = this.$page.title
+            const pageList = category==='all'?
+            this.$site.pages.filter(it=>it.frontmatter.date)
+            :
+            this.$site.pages.filter(it=>it.frontmatter.category===this.$page.title)
+            const page = Number(this.$page.path.match(/\d+(?=\.html)/)[0])
+            const pageSize = x.$site.themeConfig.pageSize || 20
+            const totalCount = pageList.length
+            const totalPage = Math.ceil(totalCount/pageSize)
+            return {
+                category,
+                page,
+                pageSize,
+                pageList,
+                totalCount:pageList.length,
+                prevPage:page>1?`${page-1}.html`:false,
+                nextPage:page<totalPage?`${page+1}.html`:false,
+                pages:this.pagination(totalPage,page,5)
+            }
+        }
+    },
+    created() {
+         window.x = this
+    },
+  methods: {
+    hightlightCurrentPage(pageNum) {
+      return pageNum === Number(this.$page.path.match(/\d+(?=\.html)/)[0])
+    },
+    /**
+     * @param totalPage 总页数
+     * @param page 当前页
+     * @param length 每次底部显示的页码数
+     */
+    pagination(totalPage,page,pageLen){
+        const halfLen = Math.ceil(pageLen/2)
+        const newArr = new Array(totalPage).fill(1).map((it,i)=>i+1)
+        const length = newArr.length
+        if(length>pageLen && page>halfLen){
+            if(length-(page-halfLen)<pageLen){
+                return newArr.splice(length-pageLen,pageLen)
+            }
+            return newArr.splice(page-halfLen,pageLen)
+        }
+        if(length>pageLen && page<=halfLen){
+            return newArr.splice(0,pageLen)
+        }
+        return newArr
+    }
+  }
 }
 </script>
 
@@ -59,6 +112,10 @@ export default {
   height 2px
 .pagination-docker
   display inline-block
+  a
+    display inline-block
+    width 40px
+    font-family: consolas,monaco,"Andale Mono",monospace;
   a:hover
     font-weight 800
   a:not(.pagination-current):hover
@@ -69,5 +126,7 @@ export default {
   float right
 .pagination-current
   font-weight 700
-  color $accentColor
+  color #f0f
+.page-box
+    display inline-block
 </style>
