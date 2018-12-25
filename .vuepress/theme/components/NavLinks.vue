@@ -19,7 +19,7 @@
       />
     </div>
 
-    <Avatar></Avatar>
+    <Avatar v-if="!isPcIndex"></Avatar>
 
     <!-- repo link -->
     <a
@@ -37,7 +37,7 @@
 
 <script>
 import DropdownLink from './DropdownLink.vue'
-import { resolveNavLinkItem } from '../util'
+import { resolveNavLinkItem,isMQMobile } from '../util'
 import NavLink from './NavLink.vue'
 import Avatar from './Avatar'
 
@@ -47,6 +47,14 @@ export default {
   computed: {
     userNav () {
       return this.$themeLocaleConfig.nav || this.$site.themeConfig.nav || []
+    },
+    isPcIndex(){
+        if(!isMQMobile()){
+            if(this.$page.regularPath==='/'){
+                return true
+            }
+        }
+        return false
     },
 
     nav () {

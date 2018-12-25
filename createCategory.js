@@ -7,7 +7,9 @@ const config = require('./.vuepress/config')
 const pageSize = config.themeConfig.pageSize || 20
 const categoryDirName = './category'
 
-/**
+
+module.exports = ()=>{
+    /**
  * 读取文件路径
  * @param startPath  起始目录文件夹路径
  * @returns {Array}
@@ -213,27 +215,30 @@ const init = ()=>{
     })  
 }
 
-/**
- * 数组
- * @param {*} arr 
- * @param {*} len 
- */
-const spliceArray = (arr,len)=>{
-    const result = []
-    const spliceDo = (a,l)=>{
-        if(a.length>l){
-            const b = a.splice(l)
-            result.push(a)
-            spliceDo(b,l)
-        }else{
-            result.push(a)
+    /**
+     * 数组
+     * @param {*} arr 
+     * @param {*} len 
+     */
+    const spliceArray = (arr,len)=>{
+        const result = []
+        const spliceDo = (a,l)=>{
+            if(a.length>l){
+                const b = a.splice(l)
+                result.push(a)
+                spliceDo(b,l)
+            }else{
+                result.push(a)
+            }
         }
+        spliceDo(arr,len)
+        return result
     }
-    spliceDo(arr,len)
-    return result
+
+    init()
 }
 
-init()
+
 
 
 

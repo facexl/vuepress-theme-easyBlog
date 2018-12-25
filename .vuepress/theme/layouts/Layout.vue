@@ -114,7 +114,6 @@ export default {
   },
 
   mounted () {
-      window.x = this
     // configure progress bar
     nprogress.configure({ showSpinner: false })
 

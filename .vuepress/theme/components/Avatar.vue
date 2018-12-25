@@ -43,16 +43,20 @@ export default {
             return this.$site.themeConfig.nav.length-1
         },
         blogsCount(){
-            return this.$site.pages.length-this.$site.themeConfig.nav.length+1
+            return this.$site.pages.length-this.$site.themeConfig.nav.length
         }
     },
     created() {
-        const img = new Image()
-        img.src = `http://www.ruanyifeng.com/images_pub/pub_${Math.floor(Math.random() * (354) + 1)}.jpg`
-        img.onload = ()=>{
+        try{
+            const img = new Image()
+            img.src = `http://www.ruanyifeng.com/images_pub/pub_${Math.floor(Math.random() * (354) + 1)}.jpg`
+            img.onload = ()=>{
             this.bgImg = `url(${img.src})`
             this.loading = false
             this.opacity = 1
+            }
+        }catch(err){
+           // node use Image Object err!------ssr error
         }
     },
 }

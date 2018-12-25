@@ -265,8 +265,19 @@ export const resolveEasyBlogPage = (pages, route)=>{
     return result
 }
 /**
- * 
+ * 目录页面
  */
 export const isCategoryPage = (route)=>{
     return route.indexOf('/category/')!==-1
+}
+/**
+ * isMQMobile
+ */
+export const isMQMobile = ()=>{
+    try{
+        return document.documentElement.clientWidth<=719
+    }catch(err){
+        // ------ssr error
+        return false
+    }
 }

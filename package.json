@@ -7,8 +7,9 @@
     "test": "npx anywhere -d .vuepress/dist -p 8080",
     "start": "vuepress dev .",
     "build": "vuepress build .",
-    "new":"node createCategory && vuepress dev .",
-    "publish": "node createCategory && npm run build && sh deploy.sh"
+    "new": "node createCategory && vuepress dev .",
+    "publish": "node createCategory && npm run build && sh deploy.sh",
+    "watch":"gulp watch"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   },
   "homepage": "https://github.com/facexl/vuepress-theme-easyBlog#readme",
   "dependencies": {
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "gulp": "^4.0.0",
+    "gulp-watch": "^5.0.1"
   }
 }
