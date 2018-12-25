@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npx anywhere -d .vuepress/dist -p 8080",
     "start": "vuepress dev .",
-    "build": "vuepress build ."
+    "build": "vuepress build .",
+    "new":"node createCategory && vuepress dev .",
+    "publish": "node createCategory && npm run build && sh deploy.sh"
   },
   "repository": {
     "type": "git",

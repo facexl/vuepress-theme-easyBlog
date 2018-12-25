@@ -1,5 +1,5 @@
 ---
-title: use TypeScript一些困惑
+title: ts学习
 date: 2018/11/12
 category: study
 ---

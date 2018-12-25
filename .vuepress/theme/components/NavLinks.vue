@@ -19,6 +19,8 @@
       />
     </div>
 
+    <Avatar></Avatar>
+
     <!-- repo link -->
     <a
       v-if="repoLink"
@@ -37,9 +39,10 @@
 import DropdownLink from './DropdownLink.vue'
 import { resolveNavLinkItem } from '../util'
 import NavLink from './NavLink.vue'
+import Avatar from './Avatar'
 
 export default {
-  components: { NavLink, DropdownLink },
+  components: { NavLink, DropdownLink,Avatar },
 
   computed: {
     userNav () {

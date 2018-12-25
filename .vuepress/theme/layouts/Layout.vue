@@ -30,7 +30,6 @@
     </Sidebar>
 
     <Home v-if="$page.frontmatter.home"/>
-
     <Page
       v-else
       :sidebar-items="sidebarItems"

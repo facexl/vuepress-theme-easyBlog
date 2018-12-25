@@ -1,6 +1,6 @@
 <template>
   <nav class="pagination-nav">
-      <div class="page-box">
+      <div v-if="page.totalPage>1" class="page-box">
         <router-link class="pagination-action pagination-prev" 
         v-if="page.prevPage"
         :to="page.prevPage"
@@ -19,6 +19,7 @@
         :to="page.nextPage"
         > →</router-link>
       </div>
+      <!-- <div>第{{page.page}}页,共{{page.totalPage}}页</div> -->
   </nav>
 </template>
 
@@ -37,7 +38,7 @@ export default {
             :
             this.$site.pages.filter(it=>it.frontmatter.category===this.$page.title)
             const page = Number(this.$page.path.match(/\d+(?=\.html)/)[0])
-            const pageSize = x.$site.themeConfig.pageSize || 20
+            const pageSize = this.$site.themeConfig.pageSize || 20
             const totalCount = pageList.length
             const totalPage = Math.ceil(totalCount/pageSize)
             return {
@@ -48,12 +49,13 @@ export default {
                 totalCount:pageList.length,
                 prevPage:page>1?`${page-1}.html`:false,
                 nextPage:page<totalPage?`${page+1}.html`:false,
-                pages:this.pagination(totalPage,page,5)
+                pages:this.pagination(totalPage,page,5),
+                totalPage
             }
         }
     },
     created() {
-         window.x = this
+
     },
   methods: {
     hightlightCurrentPage(pageNum) {
@@ -126,7 +128,7 @@ export default {
   float right
 .pagination-current
   font-weight 700
-  color #f0f
+  color #e96900
 .page-box
     display inline-block
 </style>

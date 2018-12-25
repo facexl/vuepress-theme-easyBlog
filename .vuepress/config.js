@@ -1,8 +1,11 @@
 module.exports = {
     title: '小浪博客',
-    description: '你瞅啥？',
+    description: '肖浪的博客网站,由vuepress驱动,主要记录前端技术',
+    head: [
+        ['link', { rel: 'icon', href: 'https://avatars3.githubusercontent.com/u/25611177?s=460&v=4' }]
+    ],
     themeConfig: {
-        githubLink:'https://github.com/facexl/blog',
+        githubLink:'https://github.com/facexl/facexl.github.io',
         nav: [
           { text: 'Home', link: '/' },
           { text: 'All', link: '/category/all/1' },
@@ -14,7 +17,7 @@ module.exports = {
         //   ['/','666'],
         //   ['/blog/x','6667']
         // ]
-        // sidebar: 'auto'
-        pageSize:20
+        // sidebar: 'auto',
+        pageSize:20,
     },
 }
