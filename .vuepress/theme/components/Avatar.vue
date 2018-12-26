@@ -2,7 +2,7 @@
     <div class="avatar-container">
         <div class="box">
             <div class="bg">
-            <div :style="{backgroundImage:bgImg,opacity:opacity}" class="bg-img"></div>
+            <div @click="switchImg" :style="{backgroundImage:bgImg,opacity:opacity}" class="bg-img"></div>
             <Loading v-if="loading"></Loading>
             </div>
             <div class="author">小浪</div>
@@ -46,22 +46,29 @@ export default {
             return this.$site.pages.length-this.$site.themeConfig.nav.length
         }
     },
-    activated() {
-        console.log('666')
-    },
     created() {
-        try{
-            const img = new Image()
-            img.src = `http://www.ruanyifeng.com/images_pub/pub_${Math.floor(Math.random() * (354) + 1)}.jpg`
-            img.onload = ()=>{
-            this.bgImg = `url(${img.src})`
-            this.loading = false
-            this.opacity = 1
-            }
-        }catch(err){
-           // node use Image Object err!------ssr error
-        }
+        this.loadImag()
     },
+    methods:{
+        switchImg(){
+            this.opacity = 0
+            this.loading = true
+            this.loadImag()
+        },
+        loadImag(){
+            try{
+                const img = new Image()
+                img.src = `http://www.ruanyifeng.com/images_pub/pub_${Math.floor(Math.random() * (354) + 1)}.jpg`
+                img.onload = ()=>{
+                this.bgImg = `url(${img.src})`
+                this.loading = false
+                this.opacity = 1
+                }
+            }catch(err){
+                // node use Image Object err!------ssr error
+            }
+        }
+    }
 }
 </script>
 
@@ -102,6 +109,7 @@ export default {
         transition all 1s
         border-top-left-radius 5px
         border-top-right-radius 5px
+        cursor alias
 .author
     display flex
     align-items center

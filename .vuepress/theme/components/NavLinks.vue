@@ -56,7 +56,6 @@ export default {
         }
         return false
     },
-
     nav () {
       const { locales } = this.$site
       if (locales && Object.keys(locales).length > 1) {

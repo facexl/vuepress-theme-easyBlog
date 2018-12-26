@@ -4,7 +4,7 @@ date: 2018/09/02
 category: study
 ---
 
-### bash set
+## bash set
 
 日常工作中对`.bashrc`或者`.bash_profile`设置可以提高效率
 
@@ -18,7 +18,7 @@ function goPath(){
 
 ```
 比如上面这样，在终端输入 `x projectName`就会执行在`vscode`中打开在`workspace`下的目标项目,非常方便
-##### 解放双手
+### 解放双手
 
 ```javascript
 

@@ -5,7 +5,7 @@ category: practice
 ---
 
 
-### ts in create-react-app
+## ts in create-react-app
 
 
 去掉sourceMap:

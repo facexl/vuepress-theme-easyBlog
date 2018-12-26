@@ -4,7 +4,7 @@ date: 2018/08/24
 category: practice
 ---
 
-### 移动端屏幕适配解决方案
+## 移动端屏幕适配解决方案
 
 ```javascript
 

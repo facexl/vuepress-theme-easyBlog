@@ -4,9 +4,9 @@ date: 2018/08/23
 category: study
 ---
 
-### git常用技巧
+## git常用技巧
 
-#### 1.fork后想更新源仓库的改动
+### 1.fork后想更新源仓库的改动
 
 ```javascript
 
@@ -24,7 +24,7 @@ git push origin master //提交到远程
 
 ```
 
-#### 2.暂存
+### 2.暂存
 
 ```javascript
 
@@ -36,7 +36,7 @@ git stash pop stash@{0} //取出暂存内容
 
 ```
 
-#### 3.新建/删除分支
+### 3.新建/删除分支
 
 ```javascript
 
@@ -54,7 +54,7 @@ git branch _D <branchName> //删除本地分支
 
 ```
 
-#### 4.撤销
+### 4.撤销
 
 ```javascript
 
@@ -84,7 +84,7 @@ git reset [--hard|soft|mixed|merge|keep] [commit|HEAD]
 
 ```
 
-#### 5.回滚
+### 5.回滚
 
 ```javascript
 
