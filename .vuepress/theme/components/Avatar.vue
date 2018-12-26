@@ -46,6 +46,9 @@ export default {
             return this.$site.pages.length-this.$site.themeConfig.nav.length
         }
     },
+    activated() {
+        console.log('666')
+    },
     created() {
         try{
             const img = new Image()
@@ -74,6 +77,7 @@ export default {
         width 100%
         height 20rem
         border 1px solid $borderColor
+        border-radius 5px
     .site-state 
         overflow hidden
         line-height 1.4
@@ -96,6 +100,8 @@ export default {
         top 0
         opacity 0
         transition all 1s
+        border-top-left-radius 5px
+        border-top-right-radius 5px
 .author
     display flex
     align-items center
@@ -119,6 +125,7 @@ export default {
     a
         border-bottom none 
         color #555
+        cursor default
 .site-state-item-count
     display: block;
     text-align: center;
@@ -134,6 +141,9 @@ export default {
     width 16.4rem
     right 0
     top 1rem
-    z-index 999
-    background-color #fff
+    .box
+        border-radius inherit
+  .bg 
+    .bg-img
+        border-radius inherit
 </style>

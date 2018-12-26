@@ -8,7 +8,7 @@ const pageSize = config.themeConfig.pageSize || 20
 const categoryDirName = './category'
 
 
-module.exports = ()=>{
+const createCategory = ()=>{
     /**
  * 读取文件路径
  * @param startPath  起始目录文件夹路径
@@ -238,9 +238,9 @@ const init = ()=>{
     init()
 }
 
+createCategory()
 
-
-
+module.exports = createCategory
 
 
 
