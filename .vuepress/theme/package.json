@@ -1,68 +1,14 @@
 {
-  "_from": "@vuepress/theme-default@^1.0.0-alpha.29",
-  "_id": "@vuepress/theme-default@1.0.0-alpha.29",
-  "_inBundle": false,
-  "_integrity": "sha1-RcC9cfwnQZDKoxopokY+PawslzE=",
-  "_location": "/@vuepress/theme-default",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "@vuepress/theme-default@^1.0.0-alpha.29",
-    "name": "@vuepress/theme-default",
-    "escapedName": "@vuepress%2ftheme-default",
-    "scope": "@vuepress",
-    "rawSpec": "^1.0.0-alpha.29",
-    "saveSpec": null,
-    "fetchSpec": "^1.0.0-alpha.29"
-  },
-  "_requiredBy": [
-    "/vuepress"
-  ],
-  "_resolved": "http://registry.npm.taobao.org/@vuepress/theme-default/download/@vuepress/theme-default-1.0.0-alpha.29.tgz",
-  "_shasum": "45c0bd71fc274190caa31a29a2463e3dac2c9731",
-  "_spec": "@vuepress/theme-default@^1.0.0-alpha.29",
-  "_where": "/Users/xiaolang/workspace/vuepressBlog/node_modules/vuepress",
-  "author": {
-    "name": "Evan You"
-  },
-  "bugs": {
-    "url": "https://github.com/vuejs/vuepress/issues"
-  },
-  "bundleDependencies": false,
-  "dependencies": {
-    "@vuepress/plugin-active-header-links": "^1.0.0-alpha.29",
-    "@vuepress/plugin-search": "^1.0.0-alpha.29",
-    "docsearch.js": "^2.5.2",
-    "nprogress": "^0.2.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
-  },
-  "deprecated": false,
-  "description": "Default theme for VuePress",
-  "gitHead": "b3aba2d43003f0cfd65c4b1d4a1615bd58bb20b7",
-  "homepage": "https://github.com/vuejs/vuepress/packages/@vuepress/theme-default#readme",
-  "keywords": [
-    "documentation",
-    "vue",
-    "vuepress",
-    "generator"
-  ],
-  "license": "MIT",
+  "name": "theme",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "maintainers": [
-    {
-      "name": "ULIVZ",
-      "email": "chl814@foxmail.com"
-    }
-  ],
-  "name": "@vuepress/theme-default",
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vuejs/vuepress.git"
-  },
-  "version": "1.0.0-alpha.29"
+  "author": "xiaolang",
+  "license": "ISC",
+  "dependencies": {
+    "gitalk": "^1.4.1"
+  }
 }

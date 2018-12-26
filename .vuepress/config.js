@@ -2,7 +2,9 @@ module.exports = {
     title: '小浪博客',
     description: '肖浪的博客网站,由vuepress驱动,主要记录前端技术',
     head: [
-        ['link', { rel: 'icon', href: 'https://avatars3.githubusercontent.com/u/25611177?s=460&v=4' }]
+        ['link', { rel: 'icon', href: 'https://avatars3.githubusercontent.com/u/25611177?s=460&v=4' }],
+        ['link', { rel:"stylesheet",href: 'https://unpkg.com/gitalk/dist/gitalk.css' }],
+        ['script', { src: 'https://unpkg.com/gitalk/dist/gitalk.min.js' }]
     ],
     themeConfig: {
         githubLink:'https://github.com/facexl/facexl.github.io',

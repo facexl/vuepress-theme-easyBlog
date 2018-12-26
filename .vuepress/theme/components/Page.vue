@@ -58,13 +58,13 @@
     </div>
     <slot name="bottom"/>
     <Pagination v-if="isCategoryPage"></Pagination>
+    <div id="gitalk-container"></div>
   </div>
 </template>
 
 <script>
 import { resolveEasyBlogPage, normalize, outboundRE, endingSlashRE,isCategoryPage } from '../util'
 import Pagination from './Pagination'
-
 export default {
   props: ['sidebarItems'],
   components:{
@@ -149,6 +149,18 @@ export default {
       )
     }
   },
+  mounted() {
+        var gitalk = new Gitalk({
+            clientID: 'a30708b5e0304ea8b54c',
+            clientSecret: '63a05ab493fdd64bd04efc942dbd6c86906d689f',
+            repo: 'facexl.github.io',
+            owner: 'facexl',
+            admin: ['facexl'],
+            id: location.pathname,      // Ensure uniqueness and length less than 50
+            distractionFreeMode: false,  // Facebook-like distraction free mode
+        })
+        gitalk.render('gitalk-container') 
+  },
 
   methods: {
     createEditLink (repo, docsRepo, docsDir, docsBranch, path) {
@@ -179,36 +191,10 @@ export default {
     }
   }
 }
-
-// function resolvePrev (page, items) {
-//   return find(page, items, -1)
-// }
-
-// function resolveNext (page, items) {
-//   return find(page, items, 1)
-// }
-
-// function find (page, items, offset) {
-//   const res = []
-//   items.forEach(item => {
-//     if (item.type === 'group') {
-//       res.push(...item.children || [])
-//     } else {
-//       res.push(item)
-//     }
-//   })
-//   for (let i = 0; i < res.length; i++) {
-//     const cur = res[i]
-//     if (cur.type === 'page' && cur.path === decodeURIComponent(page.path)) {
-//       return res[i + offset]
-//     }
-//   }
-// }
 </script>
 
 <style lang="stylus">
 @require '../styles/wrapper.styl'
-
 .page
   padding-bottom 2rem
 
@@ -253,5 +239,7 @@ export default {
       font-size .8em
       float none
       text-align left
-
+#gitalk-container
+    margin 0 auto
+    max-width $contentWidth
 </style>
