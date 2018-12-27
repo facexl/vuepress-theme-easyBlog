@@ -16,6 +16,7 @@
     ></div>
 
     <Sidebar
+      v-if="!isCategoryPage"
       :items="sidebarItems"
       @toggle-sidebar="toggleSidebar"
     >
@@ -53,7 +54,7 @@ import Home from '../components/Home.vue'
 import Navbar from '../components/Navbar.vue'
 import Page from '../components/Page.vue'
 import Sidebar from '../components/Sidebar.vue'
-import { resolveSidebarItems } from '../util'
+import { resolveSidebarItems,isCategoryPage } from '../util'
 
 export default {
   components: { Home, Page, Sidebar, Navbar },
@@ -80,6 +81,9 @@ export default {
         themeConfig.nav ||
         this.$themeLocaleConfig.nav
       )
+    },
+    isCategoryPage(){
+        return isCategoryPage(this.$route.path)
     },
 
     shouldShowSidebar () {

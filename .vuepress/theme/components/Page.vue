@@ -4,28 +4,6 @@
 
     <Content/>
 
-    <!-- <div class="page-edit" v-if="contentMounted">
-      <div
-        class="edit-link"
-        v-if="editLink"
-      >
-        <a
-          :href="editLink"
-          target="_blank"
-          rel="noopener noreferrer"
-        >{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
-
-      <div
-        class="last-updated"
-        v-if="lastUpdated"
-      >
-        <span class="prefix">{{ lastUpdatedText }}: </span>
-        <span class="time">{{ lastUpdated }}</span>
-      </div>
-    </div> -->
-
     <div class="page-nav" v-if="footer.prev || footer.next">
       <p class="inner">
         <span

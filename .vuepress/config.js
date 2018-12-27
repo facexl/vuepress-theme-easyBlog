@@ -19,7 +19,7 @@ module.exports = {
         //   ['/','666'],
         //   ['/blog/x','6667']
         // ]
-        // sidebar: 'auto',
+        sidebar: 'auto',
         pageSize:20,
     },
 }
