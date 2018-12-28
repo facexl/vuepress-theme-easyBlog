@@ -20,10 +20,13 @@
     "url": "https://github.com/facexl/vuepress-theme-easyBlog/issues"
   },
   "homepage": "https://github.com/facexl/vuepress-theme-easyBlog#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@vuepress/plugin-active-header-links": "^1.0.0-alpha.0",
+    "vue": "^2.5.21"
+  },
   "devDependencies": {
-    "gulp-watch": "^5.0.1",
+    "chalk": "^2.4.1",
     "gulp": "^4.0.0",
-    "chalk": "^2.4.1"
+    "gulp-watch": "^5.0.1"
   }
 }

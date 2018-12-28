@@ -69,29 +69,6 @@ export default {
     isCategoryPage(){
         return isCategoryPage(this.$route.path)
     },
-
-    // prev () {
-    //   const prev = this.$page.frontmatter.prev
-    //   if (prev === false) {
-    //     return
-    //   } else if (prev) {
-    //     return resolvePage(this.$site.pages, prev, this.$route.path)
-    //   } else {
-    //     return resolvePrev(this.$page, this.sidebarItems)
-    //   }
-    //     resolveEasyBlogPage(this.$site.pages, this.$route.path)
-    // },
-
-    // next () {
-    //   const next = this.$page.frontmatter.next
-    //   if (next === false) {
-    //     return
-    //   } else if (next) {
-    //     return resolvePage(this.$site.pages, next, this.$route.path)
-    //   } else {
-    //     return resolveNext(this.$page, this.sidebarItems)
-    //   }
-    // },
     footer(){
         return resolveEasyBlogPage(this.$site.pages, this.$route.path)
     },

@@ -39,7 +39,16 @@ export default {
   created () {
     this.refreshIndex()
   },
-
+  mounted(){
+      //点击sideBar滚动页面
+      (typeof window === 'object') &&
+      (document.querySelector('.sidebar-group-items').onclick = (e=>{ 
+          if(e.target.href){
+              const str = window.decodeURIComponent(e.target.href)
+              window.scrollTo(0,document.getElementById(str.split('#')[1]).offsetTop)
+          }
+      }))
+  },
   watch: {
     '$route' () {
       this.refreshIndex()
