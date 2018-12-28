@@ -5,7 +5,7 @@ category: study
 ---
 
 
-## use TypeScript一些困惑
+## TypeScript学习记录
 
 以下示例均是在
 typeScript 3.1.6   

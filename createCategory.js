@@ -37,7 +37,11 @@ const getContent = (fileName)=>{
     return new Promise(res=>{
         fs.readFile(fileName,(err,data)=>{
             const yaml = handleYAML(data.toString('utf-8'))
-            const { title,date,category } = yaml
+            let { title,date,category } = yaml
+            if(!date){
+                //如果yaml没有解析到日期 用文件名获取
+                date = fileName.match(/\d{8}/)[0].replace(/(\d{4})(\d{2})(\d{2})/,'$1/$2/$3')
+            }
             res({
                 path:fileName,
                 title,
