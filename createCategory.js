@@ -37,7 +37,7 @@ const getContent = (fileName)=>{
     return new Promise(res=>{
         fs.readFile(fileName,(err,data)=>{
             const yaml = handleYAML(data.toString('utf-8'))
-            let { title,date,category } = yaml
+            let { title='暂无',date,category='what' } = yaml
             if(!date){
                 //如果yaml没有解析到日期 用文件名获取
                 date = fileName.match(/\d{8}/)[0].replace(/(\d{4})(\d{2})(\d{2})/,'$1/$2/$3')
@@ -72,7 +72,9 @@ const writeFileFn = (fileName,str)=>{
  * @param {*} fileNamesArr 
  */
 const handleYAML = (str)=>{
-    const origin = str.match(/---\n[^]+\n---/)[0].split(/\n/)
+    const yamlParam = str.match(/---\n[^]+\n---/)
+    if(!yamlParam)return {}
+    const origin = yamlParam[0].split(/\n/)
     origin.pop()
     origin.shift()
     const map = {}

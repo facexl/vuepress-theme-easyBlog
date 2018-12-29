@@ -1,7 +1,7 @@
 ---
 title: markdown示例
 date: 2018/06/25
-category: study
+category: chat
 ---
 
 ## markdown示例
@@ -19,6 +19,8 @@ category: study
 ::: danger
 危险
 :::
+
+> 123
 
 ### 文字
 
