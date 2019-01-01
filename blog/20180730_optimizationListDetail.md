@@ -16,7 +16,7 @@ category: practice
  如何及时更新缓存的数据，如何抽出这样一个功能，让其他页面想要缓存也能很简单的复用
 
 ### 解决方案
-> #### 对于列表  
+#### 对于列表  
 
 页面跳转时，会销毁当前的vue实例，导致后退时又要新建这个实例，如果使用`locaStorage`储存加载的数据，同时还要记录点击的位置，后退时恢复过来，是相当麻烦的，这里推荐使用官方组件`keep-alive`，这样在组件切换时，vue实例不会销毁，自然列表还在那，且位置也是对的。  
 `关于数据更新`:keep-alive后的组件，展现时会触发`activated`生命周期，我们可以在这里请求新的数据与已有数据进行比较，有变化就重新渲染，这样数据加载在后台悄悄进行，对于用户是无感知的。下面是代码示例
@@ -47,7 +47,7 @@ category: practice
     });
   },
 ```
-> #### 对于详情  
+#### 对于详情  
 
   如果详情也使用`keep-alive`，一是用户进了A详情，再进B时会短暂显示A的内容，体验不好；二是每次要去`activited`生命周期写更新逻辑，比较麻烦。于是我放弃了`keep-alive`，自己设置了一种保存、更新数据的机制。简单的说是把数据存在`vux`中，下面是具体实现:  
 对请求进行封装，先提取关键代码，后面会贴出完整代码
@@ -99,6 +99,7 @@ axios.defaults.timeout = 55000;// 后端默认60秒返回504 安卓腾讯x5内�
    loadingText:'加载中'   // loading文字提示
    needCache: false,     // 是否需要缓存
    cacheCallBack: null,  // 缓存回调
+   isThirdApi: false,    // 是否为第三方的API
  */
 const $fetch = (apiName, params = {}, config = {}) => {
   let apiConfig = Object.assign({
@@ -128,63 +129,60 @@ const $fetch = (apiName, params = {}, config = {}) => {
     case 'post':
       apiParam = params;
   }
-  return new Promise((resolve, reject) => {
-    axios[arr[0]](arr[1], apiParam).then(res => {
-      apiConfig.needLoading && Vue.$vux.loading.hide();
 
-      // 未登录
-      if (apiConfig.loginIntercept && Number(res.data.code) === 2) {
-        // app环境出去登录
-        if (store.state.orderBaseInfo.platform === 2) {
-          location.href = baseConfig.outLoginUrl;
-          return;
-        }
-        store.state.showLoginModal = true;
-        return;
+  return axios[arr[0]](arr[1], apiParam).then(res => {
+    apiConfig.needLoading && Vue.$vux.loading.hide();
+    if (apiConfig.isThirdApi) return res.data;
+
+    // 未登录
+    if (apiConfig.loginIntercept && Number(res.data.code) === 2) {
+      // app环境出去登录
+      if (store.state.orderBaseInfo.platform === 2) {
+        location.href = baseConfig.outLoginUrl;
+        return res.data;
       }
-      // 后端错误提示
-      if (apiConfig.errorIntercept && !res.data.success) {
-        Vue.$vux.alert.show({
-          title: '提示',
-          content: res.data.message || res.data.errDesc,
-        });
-        return;
-      }
-      if (res.data.success) {
-
-        if (apiConfig.needCache) {
-          if (
-            !store.state[`___${apiName}`]
-          || JSON.stringify(store.state[`___${apiName}`].params) !== JSON.stringify(params)
-          || JSON.stringify(store.state[`___${apiName}`].data) !== JSON.stringify(res.data)
-          ) {
-            apiConfig.cacheCallBack(JSON.parse(JSON.stringify(res.data)));
-          }
-          store.state[`___${apiName}`] = {
-            data: res.data,
-            params: params
-          };
-
-
-        }
-
-        resolve(res.data);
-      } else {
-        reject(res.data);
-      }
-    }).catch(errs => {
-      apiConfig.needLoading && Vue.$vux.loading.hide();
-      console.log(errs);
+      store.state.showLoginModal = true;
+      return res.data;
+    }
+    // 后端错误提示
+    if (apiConfig.errorIntercept && !res.data.success) {
       Vue.$vux.alert.show({
         title: '提示',
-        content: '网路异常'
+        content: res.data.message || res.data.errDesc,
       });
-    });
+      throw res.data;
+    }
+    if (res.data.success) {
+
+      if (apiConfig.needCache) {
+        if (
+          !store.state[`___${apiName}`]
+        || JSON.stringify(store.state[`___${apiName}`].params) !== JSON.stringify(params)
+        || JSON.stringify(store.state[`___${apiName}`].data) !== JSON.stringify(res.data)
+        ) {
+          apiConfig.cacheCallBack(JSON.parse(JSON.stringify(res.data)));
+        }
+        store.state[`___${apiName}`] = {
+          data: res.data,
+          params: params
+        };
+      }
+      return res.data;
+    }
+
+    throw res.data;
+  }).catch(errs => {
+    apiConfig.needLoading && Vue.$vux.loading.hide();
+    console.log(errs);
+    if (typeof errs.success !== 'undefined') {
+      throw errs;
+    } else {
+      throw { message: '服务器异常' };
+    }
   });
 };
 
 export default $fetch;
-
 
 ```
 调用方式示例

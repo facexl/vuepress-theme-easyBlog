@@ -5,18 +5,18 @@ category: practice
 ---
 
 ## 记一次兼容问题处理过程
-#### 场景
+### 场景
 ios9.3.2 app内嵌vue-cli构建的移动端网站
-#### 现象
+### 现象
 客户反映app点一个按钮跳的页面是空白
-#### 定位问题
+### 定位问题
 通过沟通确定不是网络问题之后，  
 让客户用浏览器直接打开我们的网站链接，发现仍然打不开，排除了app的原因。  
 询问客户系统版本，发现是ios9.3.2,版本较低，考虑是兼容问题  
 于是用`xcode`模拟了ios9系统，使用safari打开h5链接，复现了打不开的bug，控制台提示 
 `SyntaxError: Unexpected keyword 'const'. Const declarations are not supported in strict mode.`
 奇怪了 明明用babel转了es6的语法  怎么还出现了`const`,不过好在问题是锁定了，基本完成了一大步
-#### 解决问题
+### 解决问题
 - 第一步  查看`bable`配置,并没有什么不对
 ```javascript
 {
@@ -43,7 +43,7 @@ ios9.3.2 app内嵌vue-cli构建的移动端网站
 - 第四步 删除了`query-string`，去工具库里找了个想同功能的方法代替
 - 第五步 `xcode`模拟ios9打开网站没有问题，真机ios9测试打开网站没有问题
 
-#### 反思
+### 反思
 
 ::: tip
 1、有人反映bug，首先应问清楚具体环境，`浏览器类型、浏览器版本、系统版本`等等,然后尽可能复现bug，是定位问题的最佳方式  

@@ -76,7 +76,7 @@ export default {
 .avatar-container
     position fixed
     width 13rem
-    right 5rem
+    right 2rem
     top 7rem
     z-index 999
     background-color #fff
@@ -146,7 +146,7 @@ export default {
 @media (max-width: $MQMobile)
   .avatar-container
     position relative
-    width 16.4rem
+    width 100%
     right 0
     top 1rem
     .box
@@ -154,4 +154,7 @@ export default {
   .bg 
     .bg-img
         border-radius inherit
+@media (max-width: 1300px) and (min-width:$MQMobile)
+  .avatar-container
+    visibility hidden
 </style>

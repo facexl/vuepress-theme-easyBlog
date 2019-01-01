@@ -175,12 +175,16 @@ th, td
         padding-top 0
     .sidebar
       top 0
-
 @media (min-width: ($MQMobile + 1px))
   .theme-container.no-sidebar
     .sidebar
       display none
     .page
       padding-left 0
-
+  
+@media (max-width: $MQMobile)
+    .gt-container
+      padding 1rem !important
+      .gt-meta
+          z-index 1
 @require 'mobile.styl'

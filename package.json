@@ -22,6 +22,7 @@
   "homepage": "https://github.com/facexl/vuepress-theme-easyBlog#readme",
   "dependencies": {
     "@vuepress/plugin-active-header-links": "^1.0.0-alpha.0",
+    "moment": "^2.23.0",
     "vue": "^2.5.21"
   },
   "devDependencies": {
