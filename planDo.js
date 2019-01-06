@@ -3,7 +3,6 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const filePath = './.vuepress/components/yearProcess/did.js'
-const did = require('./.vuepress/components/yearProcess/did')
 const moment = require('moment')
 const now = moment().format('YYYY-MM-DD')
 
@@ -21,24 +20,30 @@ const writeFileFn = (fileName,str)=>{
         }
       });
 }
-if(options.includes('en')){
-    console.log(did)
-    // if(!did.en.includes(now)){
-    //     did.en.push(now)
-    //     const str = `module.exports = ${JSON.stringify(did)}`
-    //     writeFileFn(filePath,str)
-    // }
+
+/**
+ * make content
+ */
+const newContent = (str,key) => {
+    const reg = new RegExp(`(${key}.+)\]`)
+    return str.replace(reg,`$1,\'${now}\']`)
 }
-if(options.includes('sport')){
-    if(!did.sport.includes(now)){
-        did.sport.push(now)
-        const str = `module.exports = {
-            en:${JSON.stringify(did.en)},
-            sport:['2019-01-01']
-        }`
-        console.log(str)
-        writeFileFn(filePath,str)
+
+let fileContent = fs.readFileSync(filePath,'utf-8')
+
+
+if(options.includes('en')){
+    console.log(typeof now)
+    if(!fileContent.match(/en.+\]/)[0].includes(now)){
+        fileContent = newContent(fileContent,'en')
     }
 }
 
+if(options.includes('sport')){
+    if(!fileContent.match(/sport.+\]/)[0].includes(now)){
+        fileContent = newContent(fileContent,'sport')
+    }
+}
+
+writeFileFn(filePath,fileContent)
 
