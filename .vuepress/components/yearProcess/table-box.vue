@@ -1,6 +1,6 @@
 <template>
     <div class="table-box">
-        <TableItem v-for="(item,i) in items" :title="item.title" :did="item.did" :key="i"></TableItem>
+        <TableItem v-for="(item,i) in items" :title="item.date" :did="item.did" :key="i"></TableItem>
     </div>
 </template>
 
