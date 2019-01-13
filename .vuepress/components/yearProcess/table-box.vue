@@ -21,11 +21,14 @@ export default {
 
 <style lang="stylus" scoped>
 .table-box
+    position relative
     display flex
     flex-direction column
     flex-wrap wrap
     width 100%
     height 80px
     align-content flex-start
-    overflow scroll
+@media (max-width: $MQMobile)
+    .table-box
+        overflow scroll
 </style>

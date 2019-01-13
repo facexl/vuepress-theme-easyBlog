@@ -45,7 +45,7 @@ export default {
       (document.querySelector('.sidebar-group-items').onclick = (e=>{ 
           if(e.target.href){
               const str = window.decodeURIComponent(e.target.href)
-              window.scrollTo(0,document.getElementById(str.split('#')[1]).offsetTop)
+              window.scrollTo(0,document.getElementById(str.split('#')[1]).offsetTop-'75')
           }
       }))
   },

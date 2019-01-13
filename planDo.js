@@ -33,7 +33,6 @@ let fileContent = fs.readFileSync(filePath,'utf-8')
 
 
 if(options.includes('en')){
-    console.log(typeof now)
     if(!fileContent.match(/en.+\]/)[0].includes(now)){
         fileContent = newContent(fileContent,'en')
     }
