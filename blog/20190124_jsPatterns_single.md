@@ -169,7 +169,7 @@ console.log(a===b,a.getProp('name')) // true xiaolang
 
 ## ts实现
 
-```javascript
+```typescript
 
 `ts实现私有属性就简单多了`
 
