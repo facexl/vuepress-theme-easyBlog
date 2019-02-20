@@ -34,7 +34,7 @@ export default {
         page(){
             const category = this.$page.title
             const pageList = category==='all'?
-            this.$site.pages.filter(it=>it.frontmatter.date)
+            this.$site.pages.filter(it=>it.frontmatter.category)
             :
             this.$site.pages.filter(it=>it.frontmatter.category===this.$page.title)
             const page = Number(this.$page.path.match(/\d+(?=\.html)/)[0])

@@ -59,6 +59,6 @@ instance.cancel(A);
 instance.publish('is subscribed');// B is subscribed
 ```
 
-## 参考资料
+## reference
 
 - https://github.com/shichuan/javascript-patterns/blob/master/design-patterns/observer.html

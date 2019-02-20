@@ -203,7 +203,7 @@ console.log(a === b, a.x); //true,test
 
 ```
 
-### 参考资料
+### reference
 
 - https://www.cnblogs.com/TomXu/archive/2012/02/20/2352817.html
 - https://github.com/shichuan/javascript-patterns/blob/master/design-patterns/singleton.html
