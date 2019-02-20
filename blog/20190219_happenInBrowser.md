@@ -40,14 +40,33 @@ category: study
 🌲绘制渲染树: 遍历渲染树，每个节点将使用 UI 后端层来绘制。整个过程叫做绘制渲染树（Painting the render tree）。
 :::
 
-渲染过程说白了，首先是基于 HTML 构建一个 DOM 树，这棵 DOM 树与 CSS 解释器解析出的 CSSOM 相结合，就有了布局渲染树。最后浏览器以布局渲染树为蓝本，去计算布局并绘制图像，我们页面的初次渲染就大功告成了。
+简单总结:首先是基于 HTML 构建一个 DOM 树，这棵 DOM 树与 CSS 解释器解析出的 CSSOM 相结合，就有了布局渲染树。最后浏览器以布局渲染树为蓝本，去计算布局并绘制图像，我们页面的初次渲染就大功告成了。
 
 之后每当一个新元素加入到这个 DOM 树当中，浏览器便会通过 CSS 引擎查遍 CSS 样式表，找到符合该元素的样式规则应用到这个元素上，然后再重新去绘制它。
 
 ### css阻塞
 
 DOM 和 CSSOM 合力才能构建渲染树。这一点会给性能造成严重影响：默认情况下，CSS 是阻塞的资源。浏览器在构建 CSSOM 的过程中，不会渲染任何已处理的内容。即便 DOM 已经解析完毕了，只要 CSSOM 不 OK，那么渲染这个事情就不 OK（这主要是为了避免没有 CSS 的 HTML 页面丑陋地“裸奔”在用户眼前）。
-即:`CSS 是阻塞渲染的资源。需要将它尽早、尽快地下载到客户端，以便缩短首次渲染的时间。`
+即:`CSS 是阻塞渲染的资源。需要将它尽快地下载到客户端，以便缩短首次渲染的时间。`
+
+关于这点我做了测试,
+准备好简单的代码。
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<link rel="stylesheet" href="https:xxxx/css/app.8c13afb71dd90515886feb84f270afd4.css">
+</head>
+<body>
+    123
+</body>
+</html>
+```
+然后打开chrome无痕模式，打开控制台，右上角三个点->more tools->network conditions->设置network throttling为slow 3g，然后打开这个html文件就会看到加载了好一会儿才会渲染出来。说明浏览器在遇到link就开始构建CSSOM树，在构建过程中，阻塞了页面的渲染。
 
 ### js阻塞
 
