@@ -12,7 +12,7 @@ category: practice
 ```javascript
 Function.prototype._call = function(_this){
     const ctx = _this || window
-    const sym = Symbol('my_call')
+    const sym = Symbol('call_ctx')
     const args = [...arguments]
     args.shift()
     ctx[sym] = this
@@ -21,13 +21,33 @@ Function.prototype._call = function(_this){
     return res
 }
 // test
-a = function(b,c){
+const a = function(b,c){
     console.log(this.a,b);
     return c 
 }
 const o = {a:1};
 a._call(o,'b',['c']) // console 1,'b' return ['c']
 console.log(o) // { a:1 }
+```
+
+### Function.prototype.bind
+
+```javascript
+Function.prototype._bind = function(_this){
+	const ctx = _this || window
+	const args = [...arguments]
+	args.shift()
+	const sym = Symbol('bind_ctx')
+	ctx[sym] = this
+	return function F(){
+        if(this instanceof F){
+            return new ctx[sym](...args,...arguments)
+        }
+		const res = ctx[sym](...args)
+		delete ctx[sym]
+		return res
+	}
+}
 ```
 
 ### Array.prototype.push
