@@ -35,17 +35,13 @@ console.log(o) // { a:1 }
 ```javascript
 Function.prototype._bind = function(_this){
 	const ctx = _this || window
-	const args = [...arguments]
-	args.shift()
-	const sym = Symbol('bind_ctx')
-	ctx[sym] = this
+	const args = [...arguments].slice(1)
+    const instance = this
 	return function F(){
         if(this instanceof F){
-            return new ctx[sym](...args,...arguments)
+            return new instance(...args,...arguments)
         }
-		const res = ctx[sym](...args)
-		delete ctx[sym]
-		return res
+		return instance.apply(_this,args.concat(...arguments))
 	}
 }
 ```
