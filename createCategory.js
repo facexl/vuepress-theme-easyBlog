@@ -9,7 +9,7 @@ const categoryDirName = './category'
 
 
 const createCategory = ()=>{
-    /**
+/**
  * 读取文件路径
  * @param startPath  起始目录文件夹路径
  * @returns {Array}
