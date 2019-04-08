@@ -15,7 +15,7 @@ category: practice
 ### Version Ⅰ
 
 为了表达得清楚，我画了思维导图：
-![](http://pndc5dj69.bkt.clouddn.com/blog/WX20190301-160421@2x.png?imageView2/0/h/580)
+![](http://img.xlcool.cn/blog/WX20190301-160421@2x.png?imageView2/0/h/580)
 
 #### 说明
 **访问过程**：浏览器请求`Nginx`web服务器，`Nginx`经过负载权衡，转发请求至某一台`java`服务器，`java`请求我们的`文件服务器`即`Projects Manager`得到文件服务器指定的资源`CDN地址`，然后用`Thymeleaf`渲染最新的资源链接到模板`html`上。然后把完整的`html`交给`浏览器`。浏览器开始`dom`解析，遇到`script`标签包裹的`资源链接`请求`CDN服务器`得到前端`js/css`资源。
@@ -32,7 +32,7 @@ category: practice
 ### Version Ⅱ
 
 这个版本当然是为了解决上个版本的问题而诞生。如果说上个版本和后端项目还有一丝的联系，这个版本前后端就彻底分离了。
-![](http://pndc5dj69.bkt.clouddn.com/blog/WX20190301-170943@2x.png)
+![](http://img.xlcool.cn/blog/WX20190301-170943@2x.png)
 
 #### 说明
 
