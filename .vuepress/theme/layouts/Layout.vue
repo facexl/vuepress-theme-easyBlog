@@ -136,6 +136,7 @@ export default {
 
   methods: {
     toggleSidebar (to) {
+      alert('fuck you')
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
     },
 

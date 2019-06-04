@@ -7,7 +7,9 @@
         alt="hero"
       >
 
-      <h1>{{ data.heroText || $title || 'Hello' }}</h1>
+      <h1>
+          {{ data.heroText || $title || 'Hello' }}
+      </h1>
 
       <p class="description">
         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
@@ -17,6 +19,24 @@
         class="action"
         v-if="data.actionText && data.actionLink"
       >
+      <!-- <a :href="data.actionLink">
+        <div class="index-btn relative">
+            {{data.actionText}}
+            <div class="line-shot">
+                    <VSparkline   
+                        :value="lineValue"
+                        :gradient="['#f72047', '#ffd200', '#1feaea']"
+                        :padding="linePadding"
+                        :line-width="lineWidth"
+                        stroke-linecap="round"
+                        :smooth="lineRadius"
+                        gradient-direction="bottom"
+                        auto-draw
+                    >
+            </VSparkline>
+            </div>
+        </div>
+      </a> -->
         <NavLink
           class="action-button"
           :item="actionLink"
@@ -51,6 +71,7 @@
 
 <script>
 import NavLink from './NavLink.vue'
+// import VSparkline from './VSparkline'
 
 export default {
   components: { NavLink },
@@ -59,13 +80,28 @@ export default {
     data () {
       return this.$page.frontmatter
     },
-
     actionLink () {
       return {
         link: this.data.actionLink,
         text: this.data.actionText
       }
-    }
+    },
+    // linePadding(){
+    //     return parseInt(Math.random()*25+1)
+    // },
+    // lineWidth(){
+    //     return parseInt(Math.random()*10+5)
+    // },
+    // lineRadius(){
+    //     return parseInt(Math.random()*16+10)
+    // },
+    // lineValue(){
+    //     let res = []
+    //     for(let i=0;i<10;i++){
+    //         res.push(parseInt(Math.random()*11))
+    //     }
+    //     return res
+    // }
   }
 }
 </script>
@@ -130,7 +166,21 @@ export default {
     border-top 1px solid $borderColor
     text-align center
     color lighten($textColor, 25%)
-
+.index-btn
+    display inline-block
+    margin 0 auto 
+    background-color #3eaf7c
+    // background-color #000
+    color #fff
+    font-size 1.2rem
+    padding .8rem 1.6rem
+    border-radius 4px
+.relative
+    position relative
+    .line-shot
+        width 200%
+        position absolute
+        left -50%
 @media (max-width: $MQMobile)
   .home
     .features
@@ -160,4 +210,8 @@ export default {
     .feature
       h2
         font-size 1.25rem
+    .relative 
+        .line-shot
+            width 300%
+            left -100%
 </style>
