@@ -41,7 +41,7 @@ export default {
 
     var c = this.$refs.indexBackground,
         x = c.getContext('2d'),
-        w = window.innerWidth*2,
+        w = window.innerWidth*3,
         h = window.innerHeight*2,
         f = 50,
         q,
@@ -107,7 +107,7 @@ export default {
 #index-background
     position absolute
     max-width 100%
-    max-height 100%
+    max-height calc(100vh - 60px)
     z-index -1
     left 0
     background #fff
