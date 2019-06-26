@@ -6,7 +6,7 @@
     @touchend="onTouchEnd"
   >
     <Navbar
-      v-if="shouldShowNavbar"
+      v-if="shouldShowNavbar && !$page.frontmatter.home"
       @toggle-sidebar="toggleSidebar"
     />
 
@@ -136,7 +136,6 @@ export default {
 
   methods: {
     toggleSidebar (to) {
-      alert('fuck you')
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
     },
 

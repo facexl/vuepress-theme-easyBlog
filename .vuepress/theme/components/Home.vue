@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <div class="hero">
+    <canvas id="index-background"></canvas>
+    <!-- <div class="hero">
       <img
         v-if="data.heroImage"
         :src="$withBase(data.heroImage)"
@@ -19,57 +20,47 @@
         class="action"
         v-if="data.actionText && data.actionLink"
       >
-      <!-- <a :href="data.actionLink">
-        <div class="index-btn relative">
-            {{data.actionText}}
-            <div class="line-shot">
-                    <VSparkline   
-                        :value="lineValue"
-                        :gradient="['#f72047', '#ffd200', '#1feaea']"
-                        :padding="linePadding"
-                        :line-width="lineWidth"
-                        stroke-linecap="round"
-                        :smooth="lineRadius"
-                        gradient-direction="bottom"
-                        auto-draw
-                    >
-            </VSparkline>
-            </div>
-        </div>
-      </a> -->
         <NavLink
           class="action-button"
           :item="actionLink"
         />
       </p>
+    </div> -->
+
+    <div class="index-center">
+        <span class="title font-base">{{$title}}</span>
+        <p class="title-tips">
+            <span>最近更新：</span>
+        </p>
+        <p class="link-item" v-for="(item,index) in recentList">
+            <router-link
+                :key="item.key"
+                :to="item.path"
+            >
+                <span class="link-item-index">{{index}}.</span>
+                <span>{{ item.title }}</span>
+            </router-link>
+        </p>
+        <p  style="text-align:right;">
+            <a href="/category/all/1.html" class="font-base more-article">更多文章</a>
+            <!-- <span style="text-align:left" class="dot"></span> -->
+        </p>
     </div>
 
-    <div
-      class="features"
-      v-if="data.features && data.features.length"
-    >
-      <div
-        class="feature"
-        v-for="(feature, index) in data.features"
-        :key="index"
-      >
-        <h2>{{ feature.title }}</h2>
-        <p>{{ feature.details }}</p>
-      </div>
-    </div>
 
     <Content class="custom"/>
 
-    <div
+    <!-- <div
       class="footer"
       v-if="data.footer"
     >
       {{ data.footer }}
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+
 import NavLink from './NavLink.vue'
 // import VSparkline from './VSparkline'
 
@@ -80,35 +71,155 @@ export default {
     data () {
       return this.$page.frontmatter
     },
+    recentList(){
+        const pages = this.$site.pages.filter(it=>it.regularPath.indexOf('blog')>-1);
+        pages.sort((a,b)=>{
+            return +b.regularPath.match(/\d{8}/)[0] - (+a.regularPath.match(/\d{8}/)[0])
+        })
+        const l = pages.length
+        return pages.slice(0,4)
+    },
     actionLink () {
       return {
         link: this.data.actionLink,
         text: this.data.actionText
       }
     },
-    // linePadding(){
-    //     return parseInt(Math.random()*25+1)
-    // },
-    // lineWidth(){
-    //     return parseInt(Math.random()*10+5)
-    // },
-    // lineRadius(){
-    //     return parseInt(Math.random()*16+10)
-    // },
-    // lineValue(){
-    //     let res = []
-    //     for(let i=0;i<10;i++){
-    //         res.push(parseInt(Math.random()*11))
-    //     }
-    //     return res
-    // }
-  }
+  },
+  mounted(){
+      var c = document.getElementById('index-background'),
+        x = c.getContext('2d'),
+        w = window.innerWidth,
+        h = window.innerHeight,
+        f = 50,
+        q,
+        r = 0,
+        u = Math.PI * 2,
+        v = Math.cos,
+        z = Math.random
+        c.width = w
+        c.height = h
+        x.scale(1, 1)
+        x.globalAlpha = 0.8
+        function i() {
+            x.clearRect(0, 0, w, h)
+            q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
+            while (q[1].x < w + f) d(q[0], q[1])
+        }
+        function d(i, j) {
+            x.beginPath()
+            x.moveTo(i.x, i.y)
+            x.lineTo(j.x, j.y)
+            var k = j.x + (z() * 2 - 0.25) * f,
+            n = y(j.y)
+            x.lineTo(k, n)
+            x.closePath()
+            r -= u / -50
+            x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+            x.fill()
+            q[0] = q[1]
+            q[1] = { x: k, y: n }
+        }
+        function y(p) {
+            var t = p + (z() * 2 - 1.1) * f
+            return (t > h || t < 0) ? y(p) : t
+        }
+        // document.addEventListener('click',i)
+        i()
+  },
 }
 </script>
 
 <style lang="stylus">
+#index-background
+    position absolute
+    width 100%
+    height 100%
+    z-index 666
+    left 0
+    background #fff
+.index-center
+    width 300px
+    position fixed
+    top 35%
+    left 50%
+    transform translate(-50%,-50%)
+    z-index 667
+    opacity 0.9
+    text-align center
+    // background-color: rgba(0,0,0,.5);
+    color: #444;
+    padding 20px
+    border-radius: 10px;
+    font-family "Montserrat", "Helvetica Neue", "Hiragino Sans GB", "LiHei Pro", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .title
+        font-size 28px
+        color: #444;
+    .font-base
+        position relative
+        &::after
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 60%;
+            left: -0.1px;
+            right: -0.1px;
+            bottom: 0;
+            transition: top 200ms cubic-bezier(0, .8, .13, 1);
+            background-color: rgba(79,192,141,0.5);
+            // background-color: #444
+    p
+        text-align left
+    .link-item
+        text-indent 50px
+        font-size 18px;
+        transition all .2s
+        &:hover
+            background-color rgba(0,0,0,.7)
+            color #fff
+            text-decoration:underline
+        a
+            color: inherit;
+            font-weight normal
+        .link-item-index
+            font-size 14px
+            font-family source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    .dot
+        display inline-block
+        height 1em
+        line-height 1
+        vertical-align -.25ex
+        overflow hidden
+        &::before
+            display block
+            content '...\A..\A.'
+            white-space pre-wrap
+            animation playDot 2s infinite step-start both
+    .more-article
+        color #444
+        &:hover
+            text-decoration:underline
+    .title-tips
+        text-align: left;
+        span
+            color #e96900
+            background-color: #f8f8f8;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size 12px
+@keyframes playDot {
+    33%{
+        transform translateY(-2em)
+    }
+    66%{
+        transform translateY(-1em)
+    }
+}
+
 .home
-  padding $navbarHeight 2rem 0
+//   padding $navbarHeight 2rem 0
   max-width 960px
   margin 0px auto
   .hero
@@ -139,28 +250,6 @@ export default {
       border-bottom 1px solid darken($accentColor, 10%)
       &:hover
         background-color lighten($accentColor, 10%)
-  .features
-    border-top 1px solid $borderColor
-    width 31.25rem
-    padding 1.2rem 0
-    margin 2.5rem auto 0 auto
-    display flex
-    flex-wrap wrap
-    align-items flex-start
-    align-content stretch
-    justify-content space-between
-  .feature
-    flex-grow 1
-    flex-basis 30%
-    max-width 30%
-    h2
-      font-size 1.4rem
-      font-weight 500
-      border-bottom none
-      padding-bottom 0
-      color lighten($textColor, 10%)
-    p
-      color lighten($textColor, 25%)
   .footer
     padding 2.5rem
     border-top 1px solid $borderColor
