@@ -282,5 +282,5 @@ export const resolveEasyBlogPage = (pages, route)=>{
  * 目录页面
  */
 export const isCategoryPage = (route)=>{
-    return route.indexOf('/category/')!==-1 || route ==='/'
+    return route.indexOf('/category/')!==-1
 }

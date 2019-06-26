@@ -32,7 +32,7 @@
       />
     </Sidebar>
 
-    <Home v-if="$page.frontmatter.home"/>
+    <Home v-if="$route.path==='/'"/>
 
     <Page
       v-else
@@ -85,7 +85,7 @@ export default {
     },
 
     isCategoryPage(){
-        return isCategoryPage(this.$route.path)
+        return isCategoryPage(this.$route.path) || this.$route.path==='/'
     },
     shouldShowSidebar () {
       const { frontmatter } = this.$page

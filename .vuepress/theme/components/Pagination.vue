@@ -25,11 +25,6 @@
 
 <script>
 export default {
-    data(){
-        return {
-            
-        }
-    },
     computed:{
         page(){
             const category = this.$page.title
@@ -53,9 +48,6 @@ export default {
                 totalPage
             }
         }
-    },
-    created() {
-
     },
   methods: {
     hightlightCurrentPage(pageNum) {

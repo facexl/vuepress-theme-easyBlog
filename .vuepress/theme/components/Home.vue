@@ -20,7 +20,7 @@
         </p>
     </div>
 
-    <Content class="theme-default-content custom"/>
+    <!-- <Content class="theme-default-content custom"/> -->
 
     <!-- <div
       class="footer"
