@@ -1,0 +1,20 @@
+{
+  "name": "vuepressblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "anywhere -d .vuepress/dist -p 8080",
+    "start": "node createCategory && vuepress dev .",
+    "build": "vuepress build . && cp -r CNAME ./.vuepress/dist",
+    "publish": "node createCategory && npm run build && sh deploy.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "anywhere": "^1.5.0",
+    "chalk": "^2.4.2",
+    "vuepress": "^1.0.2"
+  }
+}
