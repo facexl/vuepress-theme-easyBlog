@@ -1,5 +1,4 @@
 node_modules
 
 .vuepress/dist
-
-.vuepress/private.js
+.vuepress/config
