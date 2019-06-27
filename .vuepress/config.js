@@ -8,6 +8,7 @@ module.exports = {
     ],
     themeConfig: {
         githubLink:'https://github.com/facexl/facexl.github.io',
+        avatar:'https://avatars3.githubusercontent.com/u/25611177?s=460&v=4',
         nav: [
           { text: 'Home', link: '/' },
           { text: 'All', link: '/category/all/1' },

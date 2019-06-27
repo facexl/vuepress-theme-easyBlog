@@ -193,12 +193,13 @@ export default {
     // background-color: rgba(0,0,0,.5);
     color: #444;
     padding 20px
+    font-size 1rem
     border-radius: 10px;
     font-family "Montserrat", "Helvetica Neue", "Hiragino Sans GB", "LiHei Pro", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     .title
-        font-size 28px
+        font-size 1.8rem
         color: #444;
     .font-base
         position relative
@@ -224,6 +225,7 @@ export default {
             font-weight normal
             position relative
             transition all .2s
+            font-size 1rem
             &:hover
                 &::after
                     content: "";
@@ -251,6 +253,7 @@ export default {
             animation playDot 2s infinite step-start both
     .more-article
         color #444
+        font-size 1rem
         &:hover
             text-decoration:underline
     .title-tips
