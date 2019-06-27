@@ -46,6 +46,7 @@ import { resolveEasyBlogPage,isCategoryPage } from '../util'
 import Pagination from './Pagination'
 import { debuglog } from 'util';
 import Ribbon from './Ribbon'
+import gitalkConfig from '../../private'
 export default {
   props: ['sidebarItems'],
 
@@ -62,8 +63,8 @@ export default {
   },
     mounted() {
         var gitalk = new Gitalk({
-            clientID: 'a30708b5e0304ea8b54c',
-            clientSecret: '63a05ab493fdd64bd04efc942dbd6c86906d689f',
+            clientID: gitalkConfig.gitalk_id,
+            clientSecret: gitalkConfig.gitalk_sec,
             repo: 'facexl.github.io',
             owner: 'facexl',
             admin: ['facexl'],
