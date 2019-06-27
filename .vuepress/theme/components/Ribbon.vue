@@ -1,10 +1,17 @@
 <template>
-    <canvas ref="indexBackground" id="index-background"></canvas>
+    <canvas ref="indexBackground" id="index-background" :class="{
+            hidden:isCategoryPage
+        }"></canvas>
 </template>
 <script>
+import { isCategoryPage } from '../util'
 export default {
+    computed:{
+        isCategoryPage(){
+            return isCategoryPage(this.$route.path)
+        },
+    },
     mounted(){
-        window.xl = this
         if(typeof window === 'object'){
             var c = this.$refs.indexBackground,
                 x = c.getContext('2d'),
@@ -76,4 +83,7 @@ export default {
     left 0
     box-sizing border-box
     pointer-events: none
+@media (max-width: $MQMobileNarrow)
+    .hidden
+        display none
 </style>
