@@ -46,7 +46,7 @@ import { resolveEasyBlogPage,isCategoryPage } from '../util'
 import Pagination from './Pagination'
 import { debuglog } from 'util';
 import Ribbon from './Ribbon'
-import gitalkConfig from '../../config/private'
+import gitalkConfig from '../../private'
 export default {
   props: ['sidebarItems'],
 
