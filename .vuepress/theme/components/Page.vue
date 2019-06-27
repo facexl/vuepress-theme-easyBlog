@@ -1,10 +1,8 @@
 <template>
   <main class="page">
     <slot name="top"/>
-
+    <Ribbon></Ribbon>
     <Content class="theme-default-content"/>
-
-
     <div class="page-nav" v-if="footer && (footer.prev || footer.next)">
       <p class="inner">
         <span
@@ -47,11 +45,12 @@
 import { resolveEasyBlogPage,isCategoryPage } from '../util'
 import Pagination from './Pagination'
 import { debuglog } from 'util';
+import Ribbon from './Ribbon'
 export default {
   props: ['sidebarItems'],
 
   components:{
-    Pagination
+    Pagination,Ribbon
   },
   computed: {
     isCategoryPage(){
