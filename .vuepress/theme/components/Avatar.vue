@@ -56,9 +56,9 @@ export default {
     },
     methods:{
         switchImg(){
-            this.opacity = 0
-            this.loading = true
-            this.loadImag()
+            // this.opacity = 0
+            // this.loading = true
+            // this.loadImag()
         },
         loadImag(){
             try{
