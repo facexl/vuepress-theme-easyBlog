@@ -1,7 +1,7 @@
 <template>
   <main class="page">
     <slot name="top"/>
-    <Ribbon></Ribbon>
+    <Ribbon v-if="isCategoryPage"></Ribbon>
     <Content class="theme-default-content"/>
     <div class="page-nav" v-if="footer && (footer.prev || footer.next)">
       <p class="inner">
