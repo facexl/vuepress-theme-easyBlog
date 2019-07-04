@@ -35,3 +35,9 @@ category: chat
 
 另外博客内置了 `gitalk` 评论功能，需要修改 `gitalkConfig.js` 的相关配置,[gitalk 配置方式参考](https://www.jianshu.com/p/656e6101bf0f),配置将会在 `.vuepress/theme/Page.vue` 中被引用
 
+### 发布
+
+把 .vuepress 下的 dist 发布到 github 仓库就可以通过 github-pages 服务访问了，如果申请了个性域名可以修改 CNAME 文件。  
+
+另外 vuepress 提供了自动化发布的示例，即 `deploy.sh`,可以根据需要修改，然后 `npm run publish` 直接发布！
+
