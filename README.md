@@ -31,4 +31,7 @@ title: markdown示例
 category: chat
 ---
 ```
+- category文件夹是脚本生成的 无需关心
+
+另外博客内置了 `gitalk` 评论功能，需要修改 `gitalkConfig.js` 的相关配置,[gitalk 配置方式参考](https://www.jianshu.com/p/656e6101bf0f),配置将会在 `.vuepress/theme/Page.vue` 中被引用
 
