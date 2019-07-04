@@ -1,6 +1,5 @@
 ---
 title: 《深入浅出nodejs》阅读笔记
-date: 2018/08/16
 category: study
 ---
 

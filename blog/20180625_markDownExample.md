@@ -1,6 +1,5 @@
 ---
 title: markdown示例
-date: 2018/06/25
 category: chat
 ---
 

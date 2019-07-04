@@ -1,6 +1,5 @@
 ---
 title: 朴灵对同步异步的解释
-date: 2018/07/30
 category: study
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: 学习nginx
-date: 2018/09/02
 category: study
 ---
 

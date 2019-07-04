@@ -8,6 +8,7 @@ module.exports = {
         ['script', { src: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js' }]
     ],
     themeConfig: {
+        title:'小浪博客',
         githubLink:'https://github.com/facexl/vuepress-theme-easyBlog',
         avatar:'http://img.xlcool.cn/Fnlnja7TctRza5Q-IcPPN8liAxLY',
         nav: [
@@ -17,10 +18,6 @@ module.exports = {
           { text: 'Practice', link: '/category/practice/1' },
           { text: 'Chat', link: '/category/chat/1' },
         ],
-        // sidebar: [
-        //   ['/','666'],
-        //   ['/blog/x','6667']
-        // ]
         sidebar: 'auto',
         pageSize:20
     },

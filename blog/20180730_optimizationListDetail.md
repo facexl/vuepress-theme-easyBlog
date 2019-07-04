@@ -1,6 +1,5 @@
 ---
 title: 记一次对列表以及详情的优化
-date: 2018/07/30
 category: practice
 ---
 

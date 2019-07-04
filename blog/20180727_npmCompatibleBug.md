@@ -1,6 +1,5 @@
 ---
 title: 记一次兼容问题处理过程
-date: 2018/07/27
 category: practice
 ---
 

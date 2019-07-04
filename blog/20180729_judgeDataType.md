@@ -1,6 +1,5 @@
 ---
 title: 如何简单粗暴判断js的数据类型
-date: 2018/07/29
 category: study
 ---
 

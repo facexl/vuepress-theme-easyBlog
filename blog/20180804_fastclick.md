@@ -1,6 +1,5 @@
 ---
 title: fastClick的一个小坑
-date: 2018/08/04
 category: practice
 ---
 

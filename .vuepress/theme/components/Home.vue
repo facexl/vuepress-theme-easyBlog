@@ -2,7 +2,7 @@
   <main class="home" aria-labelledby="main-title">
       <Ribbon></Ribbon>
     <div class="index-center">
-        <span class="title font-base">{{$title}}</span>
+        <span class="title font-base">{{$site.themeConfig.title}}</span>
         <p class="title-tips">
             <span>最近更新:</span>
         </p>
@@ -54,7 +54,7 @@ export default {
         text: this.data.actionText
       }
     }
-  }
+  },
 }
 </script>
 
