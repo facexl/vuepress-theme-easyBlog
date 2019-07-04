@@ -23,12 +23,14 @@
                   </a>
                 </div>
             </nav>
+        <!-- <div class="pageProcess">{{pageProcess}}%</div> -->
         </div>
     </div>
 </template>
 
 <script>
 import Loading from './Loading'
+import { debuglog } from 'util';
 export default {
     components:{
         Loading
@@ -37,7 +39,8 @@ export default {
         return {
             bgImg:'',
             opacity:0,
-            loading:true
+            loading:true,
+            pageProcess:0
         }
     },
     computed: {
@@ -49,10 +52,16 @@ export default {
         },
         isIndex(){
             return this.$route.path === '/'
-        }
+        },
     },
     created() {
         this.loadImag()
+    },
+    mounted(){
+        // const height  =document.documentElement.offsetHeight+document.documentElement.scrollTop
+        // window.addEventListener('scroll',()=>{
+        //     this.pageProcess = ((window.scrollY/height)*100).toFixed(0);
+        // })
     },
     methods:{
         switchImg(){

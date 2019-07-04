@@ -126,7 +126,7 @@ export default {
     color lighten($textColor, 25%)
 
 .index-center
-    width 300px
+    // width 300px
     max-width 100%
     position absolute
     box-sizing border-box
@@ -221,6 +221,8 @@ export default {
     .feature
       max-width 100%
       padding 0 2.5rem
+  .index-center
+      width 100%
 
 @media (max-width: $MQMobileNarrow)
   .home
