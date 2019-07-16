@@ -14,8 +14,8 @@ category: practice
 ```javascript
 
 const a = [
-    { up:null, id:1, name:'水' },
-    { up:null, id:2, name:'油' },
+    { up:0, id:1, name:'水' },
+    { up:0, id:2, name:'油' },
     { up:1, id:5, name:'自来水' },
     { up:4, id:6, name:'怡宝' },
     { up:4, id:7, name:'农夫山泉' },
@@ -24,15 +24,15 @@ const a = [
     { up:1, id:4, name:'矿泉水' },
     { up:3, id:10, name:'小米' },
     { up:9, id:11, name:'超级大米' },
-    { up:null, id:3, name:'米' },
+    { up:0, id:3, name:'米' },
 ]
-// up 指的是自己的上级 id ，如果 up 为空，说明是顶级分类 。 
+// up 指的是自己的上级 id ，如果 up 为0，说明是顶级分类 。 
 ```
 > 场景1：希望把 a 处理成如下数据结构:
 ```javascript
 [
     {
-        up:null,
+        up:0,
         id:1,
         children:[
             {
@@ -49,78 +49,86 @@ const a = [
 
 // answers:
 
-function normalizeLevel(waitArr){
-
-    const res = []
-
-    loop(waitArr)
-
-    function loop(waitArr, hashMap = {}){
-        const newWait = []
-        const newHashMap = {}
-        waitArr.forEach(item => {
-            const it = {...item}
-            if (it.up === null) {
-            newHashMap[it.id] = it
-            res.push(it)
-            } else {
-                if (hashMap[it.up]) {
-                    if (hashMap[it.up].children) {
-                    hashMap[it.up].children.push(it)
-                    } else {
-                    hashMap[it.up].children = [it]
+function normalize(originArr){
+    console.time()
+    const map = {}; // 处理成功的数据
+    const res = [];
+    let waitArr = originArr;
+    let count = 0;
+    do{
+        var arr = waitArr;
+        waitArr = [];
+        for(var i = 0,l = arr.length;i < l; i++ ){
+            var temp = {...arr[i]}
+            if(temp.up===0){
+                map[temp.id] = temp
+                res.push(temp)
+            }else{
+                if(map[temp.up]){
+                    if(map[temp.up].children){
+                        map[temp.up].children.push(temp)
+                    }else{
+                        map[temp.up].children = [temp]
                     }
-                    newHashMap[it.id] = it
-                } else {
-                    newWait.push(it)
+                    map[temp.id] = temp
+                }else{
+                    waitArr.push(temp)
                 }
             }
-        })
-        // 防止找不到上级的孤儿出现
-        if(newWait.length === waitArr.length){
-            throw new Error('要爆栈啦')
+            count++
         }
-        if (newWait.length > 0) {
-            loop(newWait, newHashMap)
+        if(waitArr.length===arr.length){
+            console.log('要爆栈啦',waitArr)
+            throw new Error('stack overflow')
         }
-    }
+    }while(waitArr.length!==0)
 
-    return res
+    console.timeEnd()
+
+    return [res,count]
+    
 }
 
 // test
 
-normalizeLevel(a)  // [{"up":null,"id":1,"name":"水","children":[{"up":1,"id":5,"name":"自来水"},{"up":1,"id":4,"name":"矿泉水","children":[{"up":4,"id":6,"name":"怡宝"},{"up":4,"id":7,"name":"农夫山泉"}]}]},{"up":null,"id":2,"name":"油","children":[{"up":2,"id":8,"name":"金龙鱼"}]},{"up":null,"id":3,"name":"米","children":[{"up":3,"id":9,"name":"大米","children":[{"up":9,"id":11,"name":"超级大米"}]},{"up":3,"id":10,"name":"小米"}]}]
+normalize(a)  // [[{"up":null,"id":1,"name":"水","children":[{"up":1,"id":5,"name":"自来水"},{"up":1,"id":4,"name":"矿泉水","children":[{"up":4,"id":6,"name":"怡宝"},{"up":4,"id":7,"name":"农夫山泉"}]}]},{"up":null,"id":2,"name":"油","children":[{"up":2,"id":8,"name":"金龙鱼"}]},{"up":null,"id":3,"name":"米","children":[{"up":3,"id":9,"name":"大米","children":[{"up":9,"id":11,"name":"超级大米"}]},{"up":3,"id":10,"name":"小米"}]}],16]
 
 ```
-> 场景2：给 一个或多个 id ,多个 id 以数组形式传递,找到它以及它的所有子集 id
+> 场景2：给一个 id 找到它的所有子类(包括子类的子类)
 
-```javascript
 
-findAllPosterity = function (target, members) {
-  const targets = Array.isArray(target) ? target:[target];
-  let result = [];
-  findChildren(targets)
-  function findChildren (ids) {
-    ids.forEach(item => {
-      const children = []
-      members.forEach(it => {
-        if (it.up === item) {
-          children.push(it.id)
+``` javascript
+
+function findChildren(id,arr){
+    const res = [];
+    let newIds = [id];
+    let count = 0;
+    do{
+        const newIdsTemp = [];
+        for(let j=0,jl=newIds.length;j<jl;j++){
+            for(let i = 0, l = arr.length;i < l; i++){
+                const temp = arr[i]
+                if(temp.up === newIds[j]){
+                    res.push(temp.id)
+                    newIdsTemp.push(temp.id)
+                }
+                count++
+            }
         }
-      })
-      console.log(children)
-      if (children.length !== 0) {
-        result = result.concat(children)
-        findChildren(children)
-      }
-    })
-  }
-  return result.concat(targets)
+        if(count>10000){
+            throw new Error('stack overflow')
+        }
+        newIds = newIdsTemp
+
+    }while(newIds.length!==0)
+
+    return { res,count }
+
 }
 
 // test
-findAllPosterity(1,a) // [5, 4, 6, 7, 1]
-findAllPosterity([1,2],a) // [5, 4, 6, 7, 8, 1, 2]
+
+findChildren(1,a) //  { res:[5, 4, 6, 7],count:55 }
 
 ```
+
