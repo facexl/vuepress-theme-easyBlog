@@ -38,7 +38,7 @@ export interface AxiosConfig{
 }
 
 // eslint-disable-next-line max-len
-export const $axios = function (url: string, method:string, params = {}, config: AxiosConfig = {}, otherConfig = {}) {
+export const $axios = function (apiKey: string, params = {}, config: AxiosConfig = {}, otherConfig = {}) {
   const apiConfig = {
     loading: true,
     loadingDesc: '加载中',
@@ -50,13 +50,21 @@ export const $axios = function (url: string, method:string, params = {}, config:
     ...config
   }
 
-    apiConfig.loading && Vue.$xl.loading.show()
+  if (otherConfig.headers) {
+    otherConfig.headers.Authorization = `Bearer ${local.get('accessToken')}`
+  } else {
+    otherConfig.headers = { Authorization: `Bearer ${local.get('accessToken')}` }
+  }
+
+  apiConfig.loading && Vue.$xl.loading.show()
+
+  const apiUrlArr = apiKey.split(' ')
 
   return axios({
-    method,
-    url,
-    data: params,
-    params: method === 'get' ? params : {},
+    method: apiUrlArr[0],
+    url: apiUrlArr[1],
+    data: _params,
+    params: apiUrlArr[0].toLowerCase() === 'get' ? _params : {},
     ...otherConfig
   }).then((res: any) => {
     apiConfig.loading && Vue.$xl.loading.hide()
@@ -65,14 +73,17 @@ export const $axios = function (url: string, method:string, params = {}, config:
     }
 
     if (res.data.code === 2) {
-      message.error('未登录，即将前往登录页面..')
-      Router.replace({
-        name: 'Login',
-        query: { redirect: Router.currentRoute.fullPath }
-      })
-      throw res.data
+        if (apiConfig.auth) {
+            message.error('未登录，即将前往登录页面..')
+            Router.replace({
+                name: 'Login',
+                query: { redirect: Router.currentRoute.fullPath }
+            })
+            throw res.data
+        }
     }
-    if (apiConfig.errorFuck && !res.data.success) {
+
+    if (!res.data.success) {
       apiConfig.errorFuck && message.error(res.data.msg)
       throw res.data
     }
@@ -134,8 +145,10 @@ export default {
 
 ```javascript
 
-import { $axios, AxiosConfig } from '@/api/axiosSet'
-import { Api } from '@/api/@types/api'
+import { $axios, AxiosConfig } from '@/Global/api/axiosSet'
+import { Api } from '@/Global/api/@types/api'
+
+console.time()
 
 const originModule = require.context('./modules', true, /\.ts/)
 
@@ -143,15 +156,16 @@ const $api:Api = {}
 
 originModule.keys().forEach((it) => {
   let o = originModule(it).default
-  let apiArr:any
   Object.keys(o).forEach(key => {
-    o[`_${key}`] = apiArr[1]
+    o[`_${key}`] = o[key]
     o[key] = function (params:{} = {}, config:AxiosConfig = {}, otherConfig:{} = {}) {
-      return $axios(apiArr[1], apiArr[0], params, config, otherConfig)
+      return $axios(o[`_${key}`], params, config, otherConfig)
     }
   })
   $api[it.replace(/\.\/(.+)\.ts$/, '$1')] = originModule(it).default
 })
+
+console.timeEnd()
 
 export default Object.freeze($api)
 
