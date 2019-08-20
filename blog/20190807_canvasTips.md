@@ -51,7 +51,9 @@ img.onload = ()=>{
     // canvas draw
 }
 img.src = 'xx'
-img.setAttribute('crossOrigin', 'Anonymous')  //这样一来就可以正常导出图片了
+img.setAttribute('crossOrigin', 'Anonymous')  //这样一来就可以正常导出图片了  
+
+// 实践发现 http 图片仍然报跨域错误 https 不会 20190820
 
 ```
 

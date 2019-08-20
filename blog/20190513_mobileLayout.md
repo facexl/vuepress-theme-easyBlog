@@ -36,3 +36,34 @@ docEl.style.opacity = 0;
 ![](http://img.xlcool.cn/FikFEjj_LUuFWnKSa3BtPhkC2OV7)
 
 可以看到形式已经相当不错，`1vw` 等于屏幕宽度的 `1%`，比如设计稿按 750px 设计，那么 75px 的宽度就可以设置为 0.1vw 。如果嫌弃计算太麻烦，可以使用 `postcss-px-to-viewport` 插件。  `vw`再我看来仍然有点小瑕疵，我注意到，手动改变屏幕宽度并不会触发重新计算，手机打开淘宝会发现，竖屏切换至横屏时，淘宝团队的做法是重新加载了整个页面。这看起来并不十分完美。
+
+
+### 3.实际开发技巧(20190820)
+
+在 `postss` 配置中加入 `postcss-plugin-px2rem`插件，可以在打包时自动把`px`按所需转换为`rem`
+
+```javascript
+
+  css: {
+    loaderOptions: {
+      postcss: {
+        plugins: [
+          require('postcss-plugin-px2rem')({
+            rootValue: 32,    // px / 32 = rem
+            unitPrecision: 5, // 精确到几位小数
+            propWhiteList: [],
+            propBlackList: [],
+            exclude: /(node_modules)/,
+            selectorBlackList: [],
+            ignoreIdentifier: false,
+            replace: true,
+            mediaQuery: false,
+            minPixelValue: 0
+          }),
+          require('autoprefixer')()
+        ]
+      }
+    }
+  }
+
+```
