@@ -2,6 +2,12 @@
 
 set -e
 
+cp -r blog .vuepress
+
+mv .vuepress/blog .vuepress/原稿
+
+mv .vuepress/原稿 .vuepress/dist/原稿
+
 cd .vuepress/dist
 
 git init
