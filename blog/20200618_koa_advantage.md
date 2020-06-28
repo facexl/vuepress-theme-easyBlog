@@ -10,4 +10,4 @@ category: study
 
 ### context  
 
-koa 在 constructor 初始化了一个`context`
+koa 在 constructor 初始化了一个`context`，还对context用`node-delegates`进行了request和responese的代理
