@@ -15,13 +15,13 @@ category: practice
 虽然有14个文件报错，但都是相同错误，想过找14个文件相同点，但那样不够精准，难以定位。于是仔细看了每一批错误的堆栈。发现具体报错的代码行数总是在这个组件的最后一行。
 ```javascript
 <Export
-        :isNew="true"
-        :query="{
-            ...this.query,
-        }"
-        :exportOptions="exportOptions"
-        :url="$api.user.storeApply.export"
-      />
+    :isNew="true"
+    :query="{
+        ...this.query,
+    }"
+    :exportOptions="exportOptions"
+    :url="$api.user.storeApply.export"
+/>
 ```
 我先尝试注释了一个文件的这个组件，然后编译错误就少了一个。于是问题越来越清晰。最终定位到模板里的展开运算符(点点点)会导致编译失败。
 随后注意到了错误堆栈反复出现的`vue-template-es2015-compiler`。经查询是专门为了 vue 模板语法支持新的`es6`特性。于是问题差不多明朗了，
