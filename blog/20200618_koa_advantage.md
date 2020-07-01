@@ -16,6 +16,7 @@ koa 在 constructor 做了这几件事情:
 - 2.初始化了一个`context`，还对context用`node-delegates`设置内部request、responese的委托访问  
 - 3.初始化内部request、response对象  
 
+关于`node-delegates`我有专门一篇博客介绍，[参见这里](/blog/20200619_delegatesJs.html)
 ### 执行流程
 
 实例化一个 koa 类后，使用`use`方法注册中间件，它会把传入的函数`push`到`middleware`数组中，然后调用`listen`方法。listen 会执行node自带http

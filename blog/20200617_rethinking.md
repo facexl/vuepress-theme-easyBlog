@@ -24,11 +24,11 @@ category: chat
 
 ### 未来可期   
 
-- node api 过一遍
-- mysql 学一遍
-- koa + vue3 + ts + mysql 撸一个应用
-- koa 源码阅读 
-- vue3 源码阅读  
-- leetcode 日常刷一刷
+- [x] node api 过一遍 `6.25打卡完成`
+- [] mysql 学一遍
+- [] koa + vue3 + ts + mysql 撸一个应用
+- [x] koa 源码阅读 `7.01打卡完成`
+- [] vue3 源码阅读  
+- [] leetcode 日常刷一刷
 
 以上一个都不能少，交付时间待定为10月，到时候全国人民都会庆祝我学了这么多(逃
