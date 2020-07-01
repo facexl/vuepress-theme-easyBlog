@@ -113,4 +113,10 @@ function compose (middleware) {
     return fnMiddleware(ctx).then(handleResponse).catch(onerror);
   }
 ```
-这里的`handleResponse`没有接受参数，所以在第一个中间件 return 些什么是没有用的。这时控制权交给`respond`。respond 是一个全局的工具类函数
+这里的`handleResponse`没有接受参数，所以在第一个中间件 return 些什么是没有用的。这时控制权交给`respond`。respond 是一个全局的工具类函数，进行一些
+http状态的处理之后控制权交给原生的res.end方法
+
+### 最后
+
+koa2 中间件的设计，非常方便其他开发人员丰富框架的生态。
+源码还有很多http相关的细节处理不作为本文的重点。
