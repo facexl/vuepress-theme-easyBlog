@@ -93,7 +93,8 @@ function compose (middleware) {
   }
 ```
 )
-所以当索引到最后一个中间件时，执行`if (i === middleware.length) fn = next`会因为`if (!fn) return Promise.resolve()`直接 return 掉。
+所以当索引到最后一个中间件时，执行`if (i === middleware.length) fn = next`会因为`if (!fn) return Promise.resolve()`直接 return 掉。  
+每一个 `dispatch` 都返回一个 promise 。所以每次 `await next()`，控制权都会交给下一个中间件
 
 现在再来看官网这句描述:  
 `当一个中间件调用 next() 则该函数暂停并将控制传递给定义的下一个中间件。当在下游没有更多的中间件执行后，堆栈将展开并且每个中间件恢复执行其上游行为。`  
