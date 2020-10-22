@@ -11,6 +11,14 @@ category: practice
 - 线上环境使用`pm2`，pm2 类似 nodemon，不同之处是当系统奔溃 pm2 会重启 app。当 app 需要多核处理时，pm2 内部集成负载均衡可以指定运行多少实例(pm2 start app.js -i max)
 - post 请求使用 `koa-bodyparser`解析参数，get 请求直接 `ctx.request.query`
 
+### 登录&鉴权
+
+`koa-session`
+
+### 数据库交互
+
+`sequelize`
+
 ### 目录  
 
 ### 路由  
@@ -18,3 +26,5 @@ category: practice
 ### 登录校验  
 
 ### 数据解析  
+
+### 业务逻辑层  
