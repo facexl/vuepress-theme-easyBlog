@@ -1,14 +1,14 @@
 Arguments: 
-  /usr/local/Cellar/node/11.11.0/bin/node /usr/local/bin/yarn publish
+  /Users/xiaolang/.nvm/versions/node/v14.4.0/bin/node /usr/local/bin/yarn publish
 
 PATH: 
-  /Users/xiaolang/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/xiaolang/.npm-global/bin
+  /Users/xiaolang/.nvm/versions/node/v14.4.0/bin:/Users/xiaolang/.nvm/versions/node/v14.4.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/xiaolang/.nvm/versions/node/v14.4.0/bin
 
 Yarn version: 
   1.13.0
 
 Node version: 
-  11.11.0
+  14.4.0
 
 Platform: 
   darwin x64
@@ -16,15 +16,15 @@ Platform:
 Trace: 
   Error: canceled
       at Interface.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:125657:13)
-      at Interface.emit (events.js:197:13)
-      at Interface._ttyWrite (readline.js:820:16)
-      at ReadStream.onkeypress (readline.js:184:10)
-      at ReadStream.emit (events.js:197:13)
-      at emitKeys (internal/readline.js:424:14)
+      at Interface.emit (events.js:315:20)
+      at Interface._ttyWrite (readline.js:873:16)
+      at ReadStream.onkeypress (readline.js:213:10)
+      at ReadStream.emit (events.js:315:20)
+      at emitKeys (internal/readline/utils.js:335:14)
       at emitKeys.next (<anonymous>)
-      at ReadStream.onData (readline.js:1093:36)
-      at ReadStream.emit (events.js:197:13)
-      at addChunk (_stream_readable.js:288:12)
+      at ReadStream.onData (readline.js:1140:36)
+      at ReadStream.emit (events.js:315:20)
+      at addChunk (_stream_readable.js:302:12)
 
 npm manifest: 
   {
