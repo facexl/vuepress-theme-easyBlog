@@ -126,6 +126,7 @@ export default {
       float none
       text-align left
 #gitalk-container
+    display none
     margin 0 auto
     padding 0 1rem
     max-width $contentWidth
