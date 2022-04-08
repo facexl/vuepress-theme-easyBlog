@@ -1,9 +1,9 @@
 ---
-title: 关于 vue3 改成 <script setup> 的写法  
+title: 关于 vue3 改成 script setup 的写法  
 category: study  
 ---
 
-## 关于 vue3 改成 <script setup> 的写法    
+## 关于 vue3 改成 script setup 的写法    
 
 `script setup` 让 vue3 项目代码更加简洁了，于是准备把以前的代码重构一下，发现一个小毛病。原来的 `reactive` 结合`toRefs`解构做法不好用了。  
 
