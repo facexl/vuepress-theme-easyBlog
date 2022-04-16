@@ -62,4 +62,4 @@ const state = reactive({
 const { foo,bar } = toRefs(state)
 </script>
 ```
-接下来我尝试写个这个  
+接下来我尝试写个[这个](/blog/20220416_viteplugin_definereactive.html)  
