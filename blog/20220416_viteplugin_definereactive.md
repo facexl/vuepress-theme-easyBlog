@@ -17,7 +17,7 @@ category: practice
 
 ### 开发  
 
-#### vite plugin 实例
+#### vite plugin 示例
 
 一个`vite`的`plugin`可以像下面这样简单  
 
@@ -62,7 +62,7 @@ function transformFile(src){
 
 ```
 
-###  以下使我实现 defineReactive 宏的代码，[完整仓库链接](https://github.com/facexl/vite-plugin-vue3-define-reactive) 
+###  以下是我实现 defineReactive 宏的代码，[完整仓库链接](https://github.com/facexl/vite-plugin-vue3-define-reactive) 
 
 ```javascript
 
@@ -128,7 +128,7 @@ export const transformDefineReactiveMacro = function(src:string,options:userOpti
         sourceType: 'module'
     }).program
 
-    log('babelParse 转换的 ast',scriptAst)
+    log('after babelParse',scriptAst)
 
     const nodeBody = scriptAst.body as any
 
