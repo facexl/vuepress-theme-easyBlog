@@ -3,14 +3,14 @@ module.exports = {
     title: '小浪博客',
     description: '肖浪的博客网站,由vuepress驱动,主要记录前端技术',
     head: [
-        ['link', { rel: 'icon', href: 'http://img.xlcool.cn/WechatIMG485.jpeg' }],
+        ['link', { rel: 'icon', href: 'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4' }],
         ['link', { rel:"stylesheet",href: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css' }],
         ['script', { src: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js' }]
     ],
     themeConfig: {
         title:'小浪博客',
         githubLink:'https://github.com/facexl/vuepress-theme-easyBlog',
-        avatar:'http://img.xlcool.cn/WechatIMG485.jpeg',
+        avatar:'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4',
         nav: [
           { text: 'Home', link: '/' },
           { text: 'All', link: '/category/all/1' },
