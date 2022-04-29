@@ -7,7 +7,7 @@
     "test": "anywhere -d .vuepress/dist -p 8080",
     "start": "node createCategory && vuepress dev .",
     "build": "vuepress build . && cp -r CNAME ./.vuepress/dist",
-    "publish": "node createCategory && npm run build && sh deploy.sh"
+    "p": "node createCategory && npm run build && sh deploy.sh"
   },
   "author": "438944342@qq.com",
   "license": "ISC",
