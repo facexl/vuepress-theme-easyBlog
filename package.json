@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "anywhere -d .vuepress/dist -p 8080",
-    "start": "node createCategory && vuepress dev .",
+    "dev": "node createCategory && vuepress dev .",
     "build": "vuepress build . && cp -r CNAME ./.vuepress/dist",
     "p": "node createCategory && npm run build && sh deploy.sh"
   },

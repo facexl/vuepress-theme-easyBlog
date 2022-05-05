@@ -8,7 +8,7 @@
             <Loading v-if="loading"></Loading>
             </div>
             <div class="author">小浪</div>
-            <div class="desc">一个前端</div>
+            <div class="desc">一个前端 / <a class="contact" style="cursor:pointer;color:#3eaf7c" :href="$site.themeConfig.myGithub" target="_blank">github</a></div>
             <nav class="site-state motion-element">
                 <div class="site-state-item site-state-posts">
                   <a href="javascript:;">
@@ -24,6 +24,8 @@
                 </div>
             </nav>
         <!-- <div class="pageProcess">{{pageProcess}}%</div> -->
+        <!-- <a class="contact" style="cursor:pointer" :href="$site.themeConfig.myGithub" target="_blank">Github:{{$site.themeConfig.myGithub}}</a>
+        <div class="contact">Email:facelanglang@gmail.com</div> -->
         </div>
     </div>
 </template>
@@ -102,6 +104,10 @@ export default {
         height 20rem
         border 1px solid $borderColor
         border-radius 5px
+    .contact
+        white-space nowrap
+        font-size 12px
+        line-height: 1
     .site-state 
         overflow hidden
         line-height 1.4

@@ -10,6 +10,8 @@ module.exports = {
     themeConfig: {
         title:'小浪博客',
         githubLink:'https://github.com/facexl/vuepress-theme-easyBlog',
+        myGithub:'https://github.com/facexl',
+        email:'438944342@qq.com',
         avatar:'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4',
         nav: [
           { text: 'Home', link: '/' },
