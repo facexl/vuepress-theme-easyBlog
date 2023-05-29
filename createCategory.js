@@ -16,17 +16,22 @@ const createCategory = ()=>{
  */
 const findSync = (startPath)=>{
     let result=[];
-    function finder(path) {
+    function finder(path,dirName) {
         let files=fs.readdirSync(path);
         files.forEach((val,index) => {
             let fPath=join(path,val);
-            let stats=fs.statSync(fPath);
-            if(stats.isDirectory()) finder(fPath);
-            if(stats.isFile()) result.push(fPath);
+            let stats=fs.statSync(fPath); 
+            if(stats.isDirectory()) {
+                finder(fPath,val);
+            }
+            if(stats.isFile()) result.push(
+                fPath
+            );
         });
 
     }
     finder(startPath);
+    console.log(result)
     return result;
 }
 /**
@@ -40,7 +45,7 @@ const getContent = (fileName)=>{
             let { title='暂无',date,category='what' } = yaml
             if(!date){
                 //如果yaml没有解析到日期 用文件名获取
-                date = fileName.match(/\d{8}/)[0].replace(/(\d{4})(\d{2})(\d{2})/,'$1/$2/$3')
+                date = fileName.match(/\d{4}\/\d{4}/)[0].replace(/(\d{4}\/)(\d{2})(\d{2})/,'$1$2/$3')
             }
             res({
                 path:fileName,
