@@ -254,7 +254,6 @@ function resolveItem (item, pages, base, groupDepth = 1) {
 export const resolveEasyBlogPage = (pages, route)=>{
 
     const res = pages.filter(it=>it.regularPath.indexOf('blog')>-1);
-    console.log(res,1232435)
     res.sort((a,b)=>{
         return +b.regularPath.match(/\d{4}\/\d{4}/)[0].replace('/','') - (+a.regularPath.match(/\d{4}\/\d{4}/)[0].replace('/',''))
     })

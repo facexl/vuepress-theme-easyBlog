@@ -43,7 +43,7 @@ export default {
     recentList(){
         const pages = this.$site.pages.filter(it=>it.regularPath.indexOf('blog')>-1);
         pages.sort((a,b)=>{
-            return +b.regularPath.match(/\d{8}/)[0] - (+a.regularPath.match(/\d{8}/)[0])
+            return +b.regularPath.match(/\d{4}\/\d{4}/)[0].replace('/','') - (+a.regularPath.match(/\d{4}\/\d{4}/)[0].replace('/',''))
         })
         const l = pages.length
         return pages.slice(0,4)

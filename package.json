@@ -6,7 +6,8 @@
   "scripts": {
     "test": "anywhere -d .vuepress/dist -p 8080",
     "dev": "node createCategory && vuepress dev .",
-    "build": "vuepress build . && cp -r CNAME ./.vuepress/dist",
+    "buildold": "vuepress build . && cp -r CNAME ./.vuepress/dist",
+    "build": "vuepress build .",
     "p": "node createCategory && npm run build && sh deploy.sh"
   },
   "author": "438944342@qq.com",
