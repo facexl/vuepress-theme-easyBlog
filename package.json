@@ -7,8 +7,8 @@
     "dev": "node createCategory && vuepress dev .",
     "buildold": "vuepress build . && cp -r CNAME ./.vuepress/dist",
     "buildtip":"node 17.x+ loader-runner 报错 digital envelope routines::initialization error 所以build加上这句 export NODE_OPTIONS=--openssl-legacy-provider",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build .",
-    "publish": "node createCategory && npm run build && sh deploy.sh"
+    "build": "node createCategory && export NODE_OPTIONS=--openssl-legacy-provider && vuepress build .",
+    "publish_old": "node createCategory && npm run build && sh deploy.sh"
   },
   "author": "438944342@qq.com",
   "license": "ISC",
