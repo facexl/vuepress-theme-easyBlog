@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "dev": "node createCategory && vuepress dev .",
     "buildold": "vuepress build . && cp -r CNAME ./.vuepress/dist",
