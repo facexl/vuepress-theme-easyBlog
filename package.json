@@ -4,19 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "anywhere -d .vuepress/dist -p 8080",
     "dev": "node createCategory && vuepress dev .",
     "buildold": "vuepress build . && cp -r CNAME ./.vuepress/dist",
     "build": "vuepress build .",
-    "p": "node createCategory && npm run build && sh deploy.sh"
+    "publish": "node createCategory && npm run build && sh deploy.sh"
   },
   "author": "438944342@qq.com",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
-    "anywhere": "^1.5.0",
     "chalk": "^2.4.2",
-    "moment": "^2.24.0",
-    "vuepress": "^1.0.2"
+    "vuepress": "1.0.2"
   }
 }
