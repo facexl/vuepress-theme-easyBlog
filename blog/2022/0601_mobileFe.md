@@ -5,7 +5,68 @@ category: study
 
 ## 移动端开发总结  
 
-### 1.点击事件  
+### 1.Meta  
+
+以下是各种各样的特殊功能的`meta`标签:
+
+```html
+    <meta charset="UTF-8" />
+    <!-- 优先使用最新版本 IE 和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+    <!-- 禁止屏幕旋转 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- 全屏显示 -->
+    <meta name="full-screen" content="yes">
+    <!-- UC应用模式，使用了application这种应用模式后，页面讲默认全屏，禁止长按菜单，禁止收拾，标准排版，以及强制图片显示 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">         
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">  
+    <!-- 关闭电话自动识别 -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- 关闭邮箱自动识别 -->
+    <meta content="email=no" name="format-detection" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+    <!-- 拒绝各种缓存 未亲测是否有效 -->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <!-- 添加到主屏后的标题（IOS） -->
+    <meta name="apple-mobile-web-app-title" content="AMSZ"> 
+    <!-- 启用 WebApp 全屏模式（IOS）:当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-touch-fullscreen" content="yes" /> 
+    <!-- 百度禁止转码:通过百度手机打开网页时，百度可能会对你的网页进行转码，往你页面贴上它的广告，非常之恶心。不过我们可以通过这个meta标签来禁止它： -->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+```
+
+其中最重要的`viewport`单独解释:
+```html
+<meta 
+    name="viewport" 
+    content="
+        width=device-width,(定义视口的宽度，单位为像素,正整数或设备宽度device-width)
+        initial-scale=1.0,(定义网页初始缩放值) 
+        user-scalable=no, (定义用户是否可以缩放) 
+        minimum-sacle=1, (定义缩放最小值)
+        maximum-scale=1,  (定义缩放最大值)
+        viewport-fit=cover 刘海安全区域适配
+    "
+>
+```
+
+### 2.点击事件  
+
+#### 下面将验证 
+
+- 没设置 viewport 
+- 设置 viewport 
+- 使用 fastclick  
 
 下面用这段代码来测试:
 ```vue
@@ -53,7 +114,11 @@ FastClick(document.body)
 
 ![](http://tva1.sinaimg.cn/large/00729zFjly1h3nqd6hxdbj308w07gwer.jpg)
 
-### 2.屏幕适配  
+#### 总结：  
+
+`由于fastclick有一些潜在的 bug ,加上现代浏览器加上 viewport 已经有较好的体验，建议只需要设置 viewport就行`
+
+### 3.屏幕适配  
 
 `viewport`即视窗宽度，移动端默认`980px`，可以通过`meta`标签设置`viewport`
 
@@ -72,27 +137,18 @@ FastClick(document.body)
 ```
 #### rem
 rem依然是最常见的屏幕适配方案，它的缺点是`在大屏设备（Pad）上，元素尺寸会很大，页面显示更少的内容。`,简单的`setRem`:  
-
+注意这段代码放在`head`标签，因为`DOMContentLoaded`事件需要提前绑定
 ```javascript
-function setRem() {
-// 设置基准大小
-const baseSize = 32;
-function setRem () {
-  // 当前页面宽度相对于 750 宽的缩放比例
-  const scale = document.documentElement.clientWidth / 750;
-  let rem = baseSize * scale
-  document.documentElement.style.fontSize = rem + 'px'
-    // 对于用户改变了系统字体大小情况，可以尝试修复  
-    const real = parseFloat(window.getComputedStyle(document.documentElement.fontSize))
-    if(real!==rem){
-        document.documentElement.style.fontSize = `${rem*rem/real}px`
-    }
-}
-// 初始化
-setRem()
-window.onresize = function () {
-  setRem()
-}
+var docEl = document.documentElement;
+var resizeEvt = "orientationchange" in window ? "orientationchange" : "resize";
+var recalc = function () {
+    var clientWidth = docEl.clientWidth;
+    if (!clientWidth) return;
+    var value = 16 * (clientWidth / 375);
+    docEl.style.fontSize = `${value}px`;
+};
+window.addEventListener(resizeEvt, recalc, false);
+document.addEventListener("DOMContentLoaded", recalc, false);
 
 ```
 
@@ -108,7 +164,7 @@ window.onresize = function () {
 
 比如`vw/vh`、百分比布局、通过媒体查询响应式布局、px 为主，搭配 vw/vh、媒体查询与 flex 进行布局。暂不做详细介绍。  
 
-### 3.常用 css
+### 4.常用 css
 
 - 禁止ios和android用户选中文字 `-webkit-user-select:none`
 - 禁止ios长按时触发系统的菜单，禁止ios&android长按时下载图片`-webkit-touch-callout: none`
@@ -126,9 +182,26 @@ window.onresize = function () {
     top:-20px;
     bottom:-20px;
   }`
+- 1px 细线：
+```css
+  .border1 {
+    border-width: 1px;
+    border-style: solid;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .border1 {
+      border-width: 0.5px;
+    }
+  }
+  
+  @media screen and (-webkit-min-device-pixel-ratio: 3) {
+    .border1 {
+      border-width: 0.333333px;
+    }
+  }
+```
 
-
-### 4.滑动穿透  
+### 5.滑动穿透  
 弹窗背景有滚动条时，可以在弹窗本身上阻止掉`touchmove`的默认事件，从而不引起背景滚动，如以下代码所示：  
 ```vue
 <template>
@@ -167,4 +240,19 @@ window.onresize = function () {
   transform: translate(-50%,-50%);
 }
 </style>
+```
+
+### 6.动画硬件加速  
+
+现代浏览器都支持硬件加速，当它们检测到页面中某个DOM元素应用了某些CSS规则时就会开启，最显著的特征的元素的3D变换。
+
+在一些情况下，我们并不需要对元素应用3D变换的效果，这时候我们可以使用个小技巧“欺骗”浏览器来开启硬件加速。
+
+虽然我们可能不想对元素应用3D变换，可我们一样可以开启3D引擎。例如我们可以用transform: translateZ(0); 来开启硬件加速 。
+
+```css
+.div {
+   transform: translateZ(0);
+   /* Other transform properties here */
+}
 ```

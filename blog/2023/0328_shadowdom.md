@@ -5,7 +5,7 @@ category: study
 
 ## chrome 插件开发之使用 shadow dom 避免全局 css 污染
 
-在开发 chrome 插件的过程中，难免会往用户页面插入自己的 dom，这时候如果没有特殊处理，很容易遇到 css 全局污染的问题，
+最近开发了chatGpt chrome 插件 [`AI-chat`](https://github.com/facexl/AI-chat)，在开发 chrome 插件的过程中，难免会往用户页面插入自己的 dom，这时候如果没有特殊处理，很容易遇到 css 全局污染的问题，
 下面介绍使用 shadow-dom 解决这个问题。
 
 ### shadow dom  
