@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "dev": "node createCategory && vuepress dev .",
     "buildold": "vuepress build . && cp -r CNAME ./.vuepress/dist",
-    "build": "vuepress build .",
+    "buildtip":"node 17.x+ loader-runner 报错 digital envelope routines::initialization error 所以build加上这句 export NODE_OPTIONS=--openssl-legacy-provider",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build .",
     "publish": "node createCategory && npm run build && sh deploy.sh"
   },
   "author": "438944342@qq.com",
