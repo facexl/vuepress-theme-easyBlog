@@ -1,17 +1,13 @@
 
-### Index
+### Index  
 
-本博客小框架基于 [vuepress](http://daringfireball.net/projects/markdown/syntax)
+本博客小框架基于 [vuepress](http://daringfireball.net/projects/markdown/syntax)  
 
-### 快速开始
+### 看看我的
 
-```bash
+[https://www.xlcool.cn](https://www.xlcool.cn)
 
-npm install 
 
-npm start
-
-```
 
 ### 目录说明
 
@@ -38,7 +34,5 @@ category: chat
 
 ### 发布
 
-把 .vuepress 下的 dist 发布到 github 仓库就可以通过 github-pages 服务访问了，如果申请了个性域名可以修改 CNAME 文件。  
-
-另外 vuepress 提供了自动化发布的示例，即 `deploy.sh`,可以根据需要修改，然后 `npm run publish` 直接发布！
+建议一键部署到 `vercel`
 
