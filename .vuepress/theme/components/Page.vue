@@ -37,7 +37,6 @@
     <slot name="bottom"/>
 
     <Pagination v-if="isCategoryPage"></Pagination>
-    <div id="gitalk-container"></div>
   </main>
 </template>
 
@@ -46,7 +45,6 @@ import { resolveEasyBlogPage,isCategoryPage } from '../util'
 import Pagination from './Pagination'
 import { debuglog } from 'util';
 import Ribbon from './Ribbon'
-import gitalkConfig from '../../gitalkConfig'
 export default {
   props: ['sidebarItems'],
 
@@ -60,19 +58,7 @@ export default {
     footer(){
         return resolveEasyBlogPage(this.$site.pages, this.$route.path)
     },
-  },
-    mounted() {
-        var gitalk = new Gitalk({
-            clientID: gitalkConfig.gitalk_id,
-            clientSecret: gitalkConfig.gitalk_sec,
-            repo: gitalkConfig.repo,
-            owner: gitalkConfig.owner,
-            admin: gitalkConfig.admin,
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: false,  // Facebook-like distraction free mode
-        })
-        gitalk.render('gitalk-container') 
-  },
+  }
 }
 
 </script>
@@ -125,9 +111,4 @@ export default {
       font-size .8em
       float none
       text-align left
-#gitalk-container
-    display none
-    margin 0 auto
-    padding 0 1rem
-    max-width $contentWidth
 </style>

@@ -7,8 +7,13 @@
             <div @click="switchImg" :style="{backgroundImage:bgImg,opacity:opacity}" class="bg-img"></div>
             <Loading v-if="loading"></Loading>
             </div>
-            <div class="author">小浪</div>
-            <div class="desc">一个前端 / <a class="contact" style="cursor:pointer;color:#3eaf7c" :href="$site.themeConfig.myGithub" target="_blank">github</a></div>
+            <div class="author">{{ $site.themeConfig.short_title }}</div>
+            <div class="desc">
+                一个前端 / <a class="contact" style="cursor:pointer;color:#3eaf7c" :href="$site.themeConfig.github" target="_blank">github</a>
+                <div>
+                    <a style="cursor:pointer;" :href="'mailto:'+$site.themeConfig.email">Email:{{ $site.themeConfig.email }}</a>
+                </div>
+            </div>
             <nav class="site-state motion-element">
                 <div class="site-state-item site-state-posts">
                   <a href="javascript:;">
@@ -23,9 +28,6 @@
                   </a>
                 </div>
             </nav>
-        <!-- <div class="pageProcess">{{pageProcess}}%</div> -->
-        <!-- <a class="contact" style="cursor:pointer" :href="$site.themeConfig.myGithub" target="_blank">Github:{{$site.themeConfig.myGithub}}</a>
-        <div class="contact">Email:facelanglang@gmail.com</div> -->
         </div>
     </div>
 </template>
@@ -101,7 +103,7 @@ export default {
     background-color #fff
     .box
         width 100%
-        height 20rem
+        height 21.5rem
         border 1px solid $borderColor
         border-radius 5px
     .contact

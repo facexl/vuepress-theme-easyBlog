@@ -1,6 +1,6 @@
 // const CategoryPlugin = require('../categoryPlugin');
 module.exports = {
-    title: '小浪博客',
+    title: '浪随笔',
     description: '肖浪的博客网站,由vuepress驱动,主要记录前端技术',
     head: [
         ['link', { rel: 'icon', href: 'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4' }],
@@ -8,9 +8,10 @@ module.exports = {
         ['script', { src: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js' }]
     ],
     themeConfig: {
-        title:'小浪博客',
+        title:'浪随笔',
+        short_title:'浪',
         githubLink:'https://github.com/facexl/vuepress-theme-easyBlog',
-        myGithub:'https://github.com/facexl',
+        github:'https://github.com/facexl',
         email:'438944342@qq.com',
         avatar:'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4',
         nav: [
