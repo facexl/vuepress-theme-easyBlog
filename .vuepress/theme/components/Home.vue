@@ -25,7 +25,7 @@
     <div
       class="footer"
     >
-      <a style="color:rgba(79,192,141,0.5);font-weight:normal;font-size:12px" href="http://www.beian.miit.gov.cn">浙ICP备18054731号-1</a>
+      <a style="color:rgba(79,192,141,0.5);font-weight:normal;font-size:12px" href="http://beian.miit.gov.cn">浙ICP备18054731号-1</a>
     </div>
   </main>
 </template>
