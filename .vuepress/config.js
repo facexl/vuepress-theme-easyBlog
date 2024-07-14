@@ -1,15 +1,15 @@
 // const CategoryPlugin = require('../categoryPlugin');
 module.exports = {
-    title: '大浪淘沙',
-    description: '大浪淘沙的博客网站,由vuepress驱动,主要记录前端技术',
+    title: 'Tuco',
+    description: 'Tuco的博客网站,由vuepress驱动,主要记录前端技术',
     head: [
         ['link', { rel: 'icon', href: 'https://avatars.githubusercontent.com/u/25611177?s=400&u=11064d99200489b4c5ea21ccfdc7577fc9b000a2&v=4' }],
         ['link', { rel:"stylesheet",href: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css' }],
         ['script', { src: 'https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js' }]
     ],
     themeConfig: {
-        title:'大浪淘沙',
-        short_title:'大浪淘沙',
+        title:`Tuco's Blog`,
+        short_title:'Tuco',
         githubLink:'https://github.com/facexl/vuepress-theme-easyBlog',
         github:'https://github.com/facexl',
         email:'438944342@qq.com',
